@@ -66,9 +66,11 @@ _O design UX ainda está em fase inicial, então seria uma pequena evoçução d
 
 ### AA1
 
-###### Wireframes - A definir...
+###### Wireframes - 25/04/2022 ✅
 
-###### Criação do git para o projeto - A definir...
+###### Criação do git para o projeto - 25/04/2022 ✅
+
+### Problemas na chamada do método que mostraria uma listagem ❌
 
 ### AA2 - A definir...
 
