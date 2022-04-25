@@ -17,7 +17,7 @@ export default function Home({ navigation }) {
     };
 
     const handleRecipesList = () => {
-        navigation.navigate("Minhas receitas");
+        navigation.navigate("Visualizar receitas");
     };
 
     const handleFavorite = () => {

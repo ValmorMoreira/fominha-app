@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import apiData from "../services/api_data";
+import apiData from "../data/database.json";
 
 
 export default function RecipesList() {
@@ -19,11 +19,11 @@ export default function RecipesList() {
         style={styles.itemContainer}
         onPress={() => handleClickRecipe(item)}
       >
-        <Text style={styles.recipeTitle}>{item.title}</Text>
+        <Text style={styles.recipeTitle}>{item.name}</Text>
 
         <View style={styles.recipeFooter}>
-          <Text>{item.year}</Text>
-          <Text>{item.recipeIngrdients}</Text>
+          <Text>{item.text}</Text>
+          {/* <Text>{item.text}</Text> */}
         </View>
       </TouchableOpacity>
     );
@@ -32,7 +32,6 @@ export default function RecipesList() {
   const handleClickRecipe = (item) => {
     console.log("Clicked on item " + item.id);
     console.log("navigator.navigate para: ", item);
-    navigator.navigate.item;
   };
 
 
@@ -41,7 +40,7 @@ export default function RecipesList() {
       <Text style={styles.title}> Receitas </Text>
       <FlatList
         data={apiData}
-        renderItem={Recipe.name}
+        renderItem={Recipe}
         keyExtractor={(item) => item.index}
       />
     </View>
