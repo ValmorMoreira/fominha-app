@@ -72,12 +72,40 @@ _O design UX ainda está em fase inicial, então seria uma pequena evoçução d
 
 ### AA2 - A definir...
 
-#### Criação da base de dados - A definir...
+#### Criação da base de dados - 01/06/2022 ✅
 
-#### Imagens das receitas - A definir...
+#### Alertas de erros - 03/06/2022
 
-#### Notificações aos usuários - A definir...
+#### Imagens das receitas - 10/06/2022
 
-#### Alertas de erros - A definir...
+#### Notificações aos usuários - 12/06/2022
 
 ### Projeto final - A definir...
+
+## Backlog 
+
+### Correções da AA1 efetuadas
+
+#### Utilizei o código "keyExtractor={(item, index) => index} " para corrigir o erro de chaves da FlatList.
+
+#### Adicionado uma ScrollView na tela Home para que em telas menores apareçam todos os componentes.
+
+### Implementação de armazenamento de dados com SQLITE 
+
+#### Irei utilizar o banco de dados SQLITE para armazenamento de dados da aplicação, e também todas as operaçãos de CRUD que serão usadas no aplicativo de receitas.
+
+### Alert, Modal e ActionSheet
+
+#### Tentei utilizar o Modal na página de "About" porém me retorna um erro por uso de useState nos retornos e ele avisa que pode gerar um loop.
+
+### Acesso à API Remota
+
+#### Uso da API remota talvez para  busca de imagens dos ingredientes das receitas, ainda não defini algo para utilizar este acesso.
+
+### Recurso inédito
+
+#### Uso de Image Picker e Câmera do Smartphone para salvar foto de receita.
+
+
+
+
