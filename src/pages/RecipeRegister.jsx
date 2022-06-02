@@ -1,23 +1,114 @@
-import { StyleSheet, View, Text } from "react-native";
-import React from "react";
+import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, TextInput, Button, SafeAreaView } from 'react-native';
 
-export default function RecipeRegister() {
+import Recipes from '../services/sqlite/Recipes';
+
+
+export default function RecipeRegister({navigation}) {
+
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [preparemode, setPrepareMode] = useState('');
+  const [image, setImage] = useState('');
+
+
+  const handleSuccess = () => {
+    navigation.navigate("Minhas receitas");
+  };
+
+  const create = () => {
+    Recipes.create( {name:name, category:category, ingredients:ingredients, preparemode:preparemode})
+    .then(id => console.log('Receita: ' + name + ' cadastrada com sucesso!'))
+    .catch( err => console.log(err));
+
+    Recipes.all()
+    .then( recipe => console.log(recipe))
+    .catch( err => console.log(err));
+
+    handleSuccess();
+  };
+
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Tela de Cadastro, depende do Banco de Dados</Text>
-    </View>
+
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="auto" />
+
+      <Text style={styles.text}>Prencha os dados da receita</Text>
+      <TextInput
+        style={styles.input} placeholder={'Nome da receita'} onChangeText={setName} value={name}
+      />
+
+      <TextInput
+        style={styles.input} placeholder={'Categoria'} onChangeText={setCategory} value={category}
+      />
+
+      <TextInput
+        style={styles.input} placeholder={'Ingredientes'} onChangeText={setIngredients} value={ingredients}
+      />
+
+      <TextInput
+        style={styles.input} placeholder={'Modo de preparo'} onChangeText={setPrepareMode} value={preparemode}
+      />
+
+      <View style={styles.btn}>
+        <View >
+          <Button title={"Anexar imagem"} onPress={() =>
+            console.log("Nome da receita " + name + "  Categoria: " + category)}
+          />
+        </View>
+        <View>
+          <Text>    </Text>
+        </View>
+        <View>
+          <Button title={"Cadastrar"} onPress={() =>
+            create()}
+          />
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#AFAFAF",
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo: {
+    width: 200,
+    height: 100,
+    resizeMode: "contain",
+  },
+  input: {
+    backgroundColor: "white",
+    borderColor: "lightgrey",
+    borderWidth: 2,
+    borderRadius: 5,
+    borderBottomColor: "lightgrey",
+    width: "90%",
+    margin: 10,
+    padding: 20,
   },
   text: {
-    fontSize: 15,
-    color: "blue",
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold",
+    marginTop: 10,
+    marginBottom: 20,
   },
+  inline: {
+    flexDirection: "row",
+    marginTop: 25,
+    marginBottom: 15,
+    alignContent: "space-around",
+    alignItems: "center",
+  },
+  btn: {
+    flexDirection:"row",
+  }
 });

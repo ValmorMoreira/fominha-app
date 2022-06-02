@@ -1,5 +1,10 @@
+import AppModal from "./src/components/AppModal";
 import Routes from "./src/Routes";
 
 export default function App() {
-  return <Routes />;
+  return (
+  <AppModal>
+      <Routes />
+  </AppModal>
+);
 }

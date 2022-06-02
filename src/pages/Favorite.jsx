@@ -4,7 +4,7 @@ import React from "react";
 export default function Favorite() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Tela de Cadastro, depende do Banco de Dados</Text>
+      <Text style={styles.text}>Você ainda não possui receitas salvas...</Text>
     </View>
   );
 }
@@ -12,7 +12,7 @@ export default function Favorite() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#AFAFAF",
     alignItems: "center",
     justifyContent: "center",
   },

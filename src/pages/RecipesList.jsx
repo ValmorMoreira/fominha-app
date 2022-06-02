@@ -23,14 +23,13 @@ export default function RecipesList() {
 
         <View style={styles.recipeFooter}>
           <Text>{item.text}</Text>
-          {/* <Text>{item.text}</Text> */}
         </View>
       </TouchableOpacity>
     );
   };
 
   const handleClickRecipe = (item) => {
-    console.log("Clicked on item " + item.id);
+    console.log("Clicked on item " + item.name);
     console.log("navigator.navigate para: ", item);
   };
 
@@ -41,7 +40,8 @@ export default function RecipesList() {
       <FlatList
         data={apiData}
         renderItem={Recipe}
-        keyExtractor={(item) => item.index}
+        //keyExtractor={(item) => item.index}
+        keyExtractor={(item, index) => index} 
       />
     </View>
   );

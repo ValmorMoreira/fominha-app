@@ -23,7 +23,7 @@ export default function Register({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#AFAFAF",
     alignItems: "center",
     justifyContent: "center",
   },
