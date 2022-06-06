@@ -12,6 +12,11 @@ import apiData from "../data/database.json";
 
 export default function RecipesList() {
 
+  const handleClickRecipe = (item) => {
+    console.log("Clicked on item " + item.name);
+    console.log("navigator.navigate para: ", item);
+  };
+
   const Recipe = ({ item }) => {
 
     return (
@@ -28,11 +33,6 @@ export default function RecipesList() {
     );
   };
 
-  const handleClickRecipe = (item) => {
-    console.log("Clicked on item " + item.name);
-    console.log("navigator.navigate para: ", item);
-  };
-
 
   return (
     <View>
@@ -40,7 +40,6 @@ export default function RecipesList() {
       <FlatList
         data={apiData}
         renderItem={Recipe}
-        //keyExtractor={(item) => item.index}
         keyExtractor={(item, index) => index} 
       />
     </View>

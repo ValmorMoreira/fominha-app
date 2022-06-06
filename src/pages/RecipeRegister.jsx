@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, Image, Text, View, TextInput, Button, SafeAreaView } from 'react-native';
 
 import Recipes from '../services/sqlite/Recipes';
+import ImagePickerCustom from '../components/ImagePicker'
 
 
-export default function RecipeRegister({navigation}) {
+export default function RecipeRegister({ navigation }) {
 
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [preparemode, setPrepareMode] = useState('');
-  const [image, setImage] = useState('');
-
+  //const [image, setImage] = useState(null);
 
   const handleSuccess = () => {
     navigation.navigate("Minhas receitas");
   };
 
   const create = () => {
-    Recipes.create( {name:name, category:category, ingredients:ingredients, preparemode:preparemode})
-    .then(id => console.log('Receita: ' + name + ' cadastrada com sucesso!'))
-    .catch( err => console.log(err));
+    Recipes.create({ name: name, category: category, ingredients: ingredients, preparemode: preparemode })
+      .then(id => alert("Receita cadastrada com sucesso!"))
+      .catch(err => console.log(err));
 
     Recipes.all()
-    .then( recipe => console.log(recipe))
-    .catch( err => console.log(err));
+      .then(recipe => console.log(recipe))
+      .catch(err => console.log(err));
 
     handleSuccess();
   };
@@ -35,6 +35,11 @@ export default function RecipeRegister({navigation}) {
 
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
+
+      <Image
+        style={styles.logo}
+        source={require('../../assets/images/logo.png')}
+      />
 
       <Text style={styles.text}>Prencha os dados da receita</Text>
       <TextInput
@@ -55,9 +60,7 @@ export default function RecipeRegister({navigation}) {
 
       <View style={styles.btn}>
         <View >
-          <Button title={"Anexar imagem"} onPress={() =>
-            console.log("Nome da receita " + name + "  Categoria: " + category)}
-          />
+          <ImagePickerCustom />
         </View>
         <View>
           <Text>    </Text>
@@ -67,6 +70,7 @@ export default function RecipeRegister({navigation}) {
             create()}
           />
         </View>
+
       </View>
     </SafeAreaView>
   );
@@ -109,6 +113,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
-    flexDirection:"row",
+    flexDirection: "row",
   }
 });

@@ -74,11 +74,13 @@ _O design UX ainda está em fase inicial, então seria uma pequena evoçução d
 
 #### Criação da base de dados - 01/06/2022 ✅
 
-#### Alertas de erros - 03/06/2022
+### Criação de Alert em funcionalidade - 05/06/2022 ✅
 
-#### Imagens das receitas - 10/06/2022
+#### Alertas de erros - 08/06/2022
 
-#### Notificações aos usuários - 12/06/2022
+#### Imagens das receitas - 12/06/2022
+
+#### Notificações (A definir...)
 
 ### Projeto final - A definir...
 
@@ -96,7 +98,9 @@ _O design UX ainda está em fase inicial, então seria uma pequena evoçução d
 
 ### Alert, Modal e ActionSheet
 
-#### Tentei utilizar o Modal na página de "About" porém me retorna um erro por uso de useState nos retornos e ele avisa que pode gerar um loop.
+#### Modal implementado com sucesso na tela do "About" falta apenas estilizar.
+
+#### Também utilizando "Alert" para notificar que a receita foi cadastrada com sucesso.
 
 ### Acesso à API Remota
 
@@ -104,7 +108,9 @@ _O design UX ainda está em fase inicial, então seria uma pequena evoçução d
 
 ### Recurso inédito
 
-#### Uso de Image Picker e Câmera do Smartphone para salvar foto de receita.
+#### Uso de Image Picker e Câmera do Smartphone para salvar foto de receita. Provavelmente criarei um componente separado para adicionar esta funcionalidade, assim como um componente "Search" para filtros.
+
+#### Estou testando utilizar este recurso https://docs.expo.dev/versions/latest/sdk/imagepicker/
 
 
 

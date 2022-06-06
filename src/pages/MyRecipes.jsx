@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
+  Image,
   FlatList,
   StyleSheet,
   TouchableOpacity,
@@ -9,45 +10,58 @@ import {
 
 import Recipes from "../services/sqlite/Recipes";
 
-const allRecipes = Recipes.all();
-
-console.log(JSON.stringify(Recipes.all()));
-
-
 export default function MyRecipes() {
 
-  const Recipe = ({ item }) => {
+  const [recipesList, setRecipesList] = useState([]);
 
+  // com Promises
+  useEffect(() => {
+    let database = Recipes.all();
+    database.then((database) => {
+      setRecipesList(database);
+    })
+      .catch((error) => {
+        alert("Ocorreu um erro ao buscar os items " + "Debug mode: " + error);
+      });
+  }, []);
+
+  const handleClickRecipe = (item) => {
+    console.log("Clicked on item " + JSON.stringify(item));
+    console.log("navigator.navigate para: ", item.id);
+    //navigation.navigate("Detalhes da receita", { item }); aqui vai direcionar pra tela de detalhes da receita
+  };
+
+  const Recipe = ({ item }) => {
     return (
       <TouchableOpacity
-        style={styles.itemContainer}
         onPress={() => handleClickRecipe(item)}
       >
-        <Text style={styles.recipeTitle}>{item.id}</Text>
-        <Text style={styles.recipeTitle}>{item.name}</Text>
-        <View style={styles.recipeFooter}>
-          <Text style={styles.recipeTitle}>{item.category}</Text>
-          <Text style={styles.recipeTitle}>{item.ingredients}</Text>
-          <Text style={styles.recipeTitle}>{item.prepareMode}</Text>
+        <View style={styles.itemContainer}>
+          <Text style={styles.recipeTitle}> Nome: {item.name}</Text>
+          <View style={styles.recipeCategory}>
+            <Text>Categoria: {item.category}</Text>
+            <Text>Ingredientes: {item.ingredients}</Text>
+          </View>
+          <View style={styles.image}>
+            <Image
+              style={styles.logo}
+              source={require('../../assets/images/logo.png')}
+            />
+            
+          </View>
+          <Text> Clique para ver mais detalhes (Em breve) </Text>
         </View>
       </TouchableOpacity>
     );
   };
 
-  const handleClickRecipe = (item) => {
-    console.log("Clicked on item " + item);
-    console.log("navigator.navigate para: ", item.id);
-  };
-
-
   return (
     <View>
       <Text style={styles.title}></Text>
       <FlatList
-        data={JSON.stringify(allRecipes)}
+        data={recipesList}
         renderItem={Recipe}
-        //keyExtractor={(item) => item.index}
-        keyExtractor={(item, index) => index} 
+        keyExtractor={(_item, index) => index}
       />
     </View>
   );
@@ -55,15 +69,23 @@ export default function MyRecipes() {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
+    flex: 1,
+    fontSize: 17,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 3,
+    marginRight: 5,
+    marginLeft: 5,
   },
   itemContainer: {
     backgroundColor: "#ddd",
+    margin: 10,
     marginBottom: 8,
     padding: 20,
-    borderRadius: 5, 
+    borderRadius: 5,
     borderColor: "#000",
-    borderWidth:1,
+    borderWidth: 1,
+    position: "relative",
   },
   recipeTitle: {
     fontSize: 16,
@@ -73,4 +95,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  recipeCategory: {
+    textDecorationColor: "blue",
+  },
+  image:{
+    width:150,
+    position:"relative",
+    marginLeft: 200,
+    alignItems:"center",
+    paddingVertical: 20,
+  }
 });
