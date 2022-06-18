@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Pressable } from "react-native";
 import React, { useContext } from "react";
 import { ModalContext } from "../components/AppModal";
 
@@ -20,7 +20,9 @@ export default function About() {
       <Text style={styles.text}> Todos os dieritos reservados</Text>
       <Text style={styles.text}>Valmor Moreira</Text>
       <Text style={styles.text}>Fominha - Version 1.0</Text>
-      <Button title="Ver modal" onPress={handleModal} />
+      <Pressable style={styles.btn} onPress={handleModal}>
+        <Text style={styles.textWhite}>Easter Egg</Text>
+      </Pressable>
     </View>
   );
 }
@@ -28,12 +30,25 @@ export default function About() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#AFAFAF",
+    backgroundColor: "purple",
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
     fontSize: 18,
-    color: "blue",
-  }
+    color: "white",
+  },
+  textWhite: {
+    fontSize: 22,
+    color: "purple",
+    textAlign: "center",
+},
+btn: {
+    paddingVertical: 20,
+    paddingHorizontal:20,
+    borderRadius: 10,
+    elevation: 3,
+    backgroundColor: "white",
+    margin: 15,
+},
 });

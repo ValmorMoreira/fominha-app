@@ -79,7 +79,7 @@ export default function RecipeRegister({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#AFAFAF",
+    backgroundColor: "purple",
     alignItems: 'center',
     justifyContent: 'center',
   },

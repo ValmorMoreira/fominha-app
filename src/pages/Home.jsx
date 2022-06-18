@@ -64,11 +64,11 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#AFAFAF",
+        backgroundColor: "purple",
     },
     textWhite: {
-        fontSize: 20,
-        color: "#fff",
+        fontSize: 22,
+        color: "purple",
         textAlign: "center",
     },
     textUpperCase: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         borderRadius: 10,
         elevation: 3,
-        backgroundColor: "#3B76ED",
+        backgroundColor: "white",
         margin: 15,
     },
     center:{

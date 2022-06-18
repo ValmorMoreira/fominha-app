@@ -66,7 +66,7 @@ export default function RecipeEdit({navigation}) {
         </View>
         <View>
           <Button title={"Atualizar"} onPress={() =>
-            create()}
+            edit()}
             disabled={!isEnabled}
           />
         </View>

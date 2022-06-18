@@ -33,13 +33,13 @@ export default function MyRecipes() {
 
   const Recipe = ({ item }) => {
     return (
-      <TouchableOpacity
+      <TouchableOpacity 
         onPress={() => handleClickRecipe(item)}
       >
         <View style={styles.itemContainer}>
           <Text style={styles.recipeTitle}> Nome: {item.name}</Text>
-          <View style={styles.recipeCategory}>
-            <Text>Categoria: {item.category}</Text>
+          <View >
+            <Text style={styles.recipeCategory}>Categoria: {item.category}</Text>
             <Text>Ingredientes: {item.ingredients}</Text>
           </View>
           <View style={styles.image}>
@@ -56,7 +56,7 @@ export default function MyRecipes() {
   };
 
   return (
-    <View>
+    <View style={styles.bg}>
       <Text style={styles.title}></Text>
       <FlatList
         data={recipesList}
@@ -69,34 +69,36 @@ export default function MyRecipes() {
 
 const styles = StyleSheet.create({
   title: {
-    flex: 1,
+    position:"relative",
     fontSize: 17,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 3,
     marginRight: 5,
     marginLeft: 5,
+    color:"white",
   },
   itemContainer: {
-    backgroundColor: "#ddd",
+    backgroundColor: "white",
     margin: 10,
     marginBottom: 8,
     padding: 20,
     borderRadius: 5,
     borderColor: "#000",
     borderWidth: 1,
-    position: "relative",
+    position:"relative",
   },
   recipeTitle: {
     fontSize: 16,
     fontWeight: "bold",
+    color:"purple",
   },
   recipeFooter: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   recipeCategory: {
-    textDecorationColor: "blue",
+    color:"brown",
   },
   image:{
     width:150,
@@ -104,5 +106,10 @@ const styles = StyleSheet.create({
     marginLeft: 200,
     alignItems:"center",
     paddingVertical: 20,
+    backgroundColor:"black",
+  },
+  bg: {
+    backgroundColor:"purple",
+    height:1000,
   }
 });

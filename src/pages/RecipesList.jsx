@@ -35,7 +35,7 @@ export default function RecipesList() {
 
 
   return (
-    <View>
+    <View style={styles.bg}>
       <Text style={styles.title}> Receitas </Text>
       <FlatList
         data={apiData}
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   itemContainer: {
-    backgroundColor: "#ddd",
+    backgroundColor: "white",
     marginBottom: 8,
     padding: 20,
     borderRadius: 5, 
@@ -66,4 +66,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  bg:{
+    backgroundColor:"purple",
+  }
 });

@@ -16,15 +16,14 @@ export default function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Cadastro" component={Register} />        
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Cadastro de receita" component={RecipeRegister} />
         <Stack.Screen name="Visualizar receitas" component={RecipesList} />
         <Stack.Screen name="Favoritas" component={Favorite} />
         <Stack.Screen name="Minhas receitas" component={MyRecipes} />
-        <Stack.Screen name="About" component={About} />
-
-        <Stack.Screen name="Cadastro" component={Register} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="About" component={About} />   
       </Stack.Navigator>
     </NavigationContainer>
   );

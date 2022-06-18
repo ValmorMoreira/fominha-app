@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, Pressable, Button, Switch, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Pressable, Button, Switch } from 'react-native';
 
 export default function RecipesList({navigation}) {
 
@@ -12,15 +12,20 @@ export default function RecipesList({navigation}) {
         navigation.navigate("Cadastro");
     };
 
+    const handleLoginValidate = () => {
+        navigation.navigate("Home");
+    };
+
     return (
 
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <StatusBar style="auto" />
+            <Text style={styles.text}>Seja bem vindo ao Fominha App</Text>
             <Image
                 style={styles.logo}
                 source={require('../../assets/images/logo.png')}
             />
-            <Text style={styles.text}>Sign Up!</Text>
+            <Text style={styles.text}>Faça seu Login</Text>
             <TextInput
                 style={styles.input} placeholder={'E-mail'} onChangeText={event => setEmail(event)} onChange={setEmail} value={email}
             />
@@ -30,16 +35,15 @@ export default function RecipesList({navigation}) {
             />
 
             <View style={styles.inline}>
-                <Text>Subscribe to Newsletter</Text>
+                <Text>Mantenha-me logado</Text>
 
                 <Switch value={isEnabled} onValueChange={setIsEnabled} trackColor={{ false: "grey", true: "green" }}
                     thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"} />
             </View>
 
-            <Button title={"Let's Go!"} onPress={() =>
-                console.log("E-mail " + email + "  Password: " + password)}
-                disabled={!isEnabled}
-            />
+            <Pressable style={styles.btn} onPress={handleLoginValidate} disabled={!isEnabled}>
+                <Text style={styles.textWhite}>Login</Text>
+            </Pressable>
 
             <View>
                 <Pressable onPress={handleRegister}>
@@ -47,14 +51,14 @@ export default function RecipesList({navigation}) {
                 </Pressable>
             </View>
 
-        </SafeAreaView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#AFAFAF",
+        backgroundColor: "purple",
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -64,11 +68,11 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
     },
     input: {
-        color: "grey",
-        borderColor: "lightgrey",
+        backgroundColor:"white",
+        borderColor: "black",
         borderWidth: 2,
         borderRadius: 5,
-        borderBottomColor: "lightgrey",
+        borderBottomColor: "black",
         width: "90%",
         margin: 4,
         padding: 6,
@@ -86,5 +90,18 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         alignContent: "space-around",
         alignItems: "center",
+    },
+    btn: {
+        padding:20,
+        paddingVertical: 20,
+        borderRadius: 10,
+        elevation: 3,
+        backgroundColor: "white",
+        margin: 15,
+    },
+    textWhite: {
+        fontSize: 22,
+        color: "purple",
+        textAlign: "center",
     }
 });

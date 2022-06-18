@@ -12,12 +12,12 @@ export default function Favorite() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#AFAFAF",
+    backgroundColor: "purple",
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
-    fontSize: 15,
-    color: "blue",
+    fontSize: 20,
+    color: "white",
   },
 });
