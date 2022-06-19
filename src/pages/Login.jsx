@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput, Pressable, Button, Switch } from 'react-native';
 
 export default function RecipesList({navigation}) {
@@ -19,11 +18,9 @@ export default function RecipesList({navigation}) {
     return (
 
         <View style={styles.container}>
-            <StatusBar style="auto" />
-            <Text style={styles.text}>Seja bem vindo ao Fominha App</Text>
             <Image
                 style={styles.logo}
-                source={require('../../assets/images/logo.png')}
+                source={require('../../assets/images/logo-fominha.png')}
             />
             <Text style={styles.text}>Faça seu Login</Text>
             <TextInput
@@ -35,10 +32,10 @@ export default function RecipesList({navigation}) {
             />
 
             <View style={styles.inline}>
-                <Text>Mantenha-me logado</Text>
+                <Text style={styles.smallText}>Mantenha-me logado</Text>
 
-                <Switch value={isEnabled} onValueChange={setIsEnabled} trackColor={{ false: "grey", true: "green" }}
-                    thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"} />
+                <Switch value={isEnabled} onValueChange={setIsEnabled} trackColor={{ false: "grey", true: "white" }}
+                    thumbColor={isEnabled ? "green" : "#f4f3f4"} />
             </View>
 
             <Pressable style={styles.btn} onPress={handleLoginValidate} disabled={!isEnabled}>
@@ -47,7 +44,7 @@ export default function RecipesList({navigation}) {
 
             <View>
                 <Pressable onPress={handleRegister}>
-                    <Text>Não possui uma conta? Clique aqui.</Text>
+                    <Text style={styles.smallText}>Não possui uma conta? Clique aqui.</Text>
                 </Pressable>
             </View>
 
@@ -63,26 +60,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     logo: {
-        width: 200,
-        height: 100,
+        width: 300,
+        height: 180,
         resizeMode: "contain",
     },
     input: {
         backgroundColor:"white",
         borderColor: "black",
         borderWidth: 2,
-        borderRadius: 5,
+        borderRadius: 50,
         borderBottomColor: "black",
         width: "90%",
         margin: 4,
-        padding: 6,
+        padding: 10,
     },
     text: {
         fontSize: 20,
         textAlign: "center",
         fontWeight: "bold",
-        marginTop: 10,
+        marginTop: 60,
         marginBottom: 20,
+        color:"lightgrey",
     },
     inline: {
         flexDirection: "row",
@@ -90,7 +88,7 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         alignContent: "space-around",
         alignItems: "center",
-    },
+   },
     btn: {
         padding:20,
         paddingVertical: 20,
@@ -103,5 +101,8 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: "purple",
         textAlign: "center",
+    },
+    smallText:{
+        color:"white",
     }
 });

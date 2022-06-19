@@ -1,4 +1,4 @@
-import { View, Modal, StyleSheet} from "react-native";
+import { View, Modal, StyleSheet, Image} from "react-native";
 import React, { useState, createContext } from "react";
 
 export const ModalContext = createContext();
@@ -38,19 +38,37 @@ export default function AppModal({ children }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    margin: 20,
+    backgroundColor: "purple",
+    borderRadius: 5,
+    padding:5,
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(0.5,0.5,0.5,0.5)",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
   },
   content: {
-    width: "80%",
-    height: "80%",
-    margin: 8,
-    padding: 8,
+    width: "100%",
+    height: "100%",
     backgroundColor: "white",
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "space-around",
   },
+  recipeName:{
+    fontSize:25,
+    fontWeight: "bold",
+    color:"purple",
+  },
+  image:{
+    width: 150,
+    height: 150,
+    resizeMode: "contain",
+  }
+
 });

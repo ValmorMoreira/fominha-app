@@ -76,13 +76,11 @@ _O design UX ainda está em fase inicial, então seria uma pequena evoçução d
 
 ### Criação de Alert em funcionalidade - 05/06/2022 ✅
 
-#### Alertas de erros - 08/06/2022
+#### Alertas de erros - 08/06/2022 ✅
 
-#### Imagens das receitas - 12/06/2022
+#### Imagens das receitas - 12/06/2022 (Em progresso)
 
-#### Notificações (A definir...)
-
-### Projeto final - A definir...
+### Projeto final - (Em andamento)
 
 ## Backlog 
 

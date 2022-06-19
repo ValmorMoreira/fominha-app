@@ -36,7 +36,7 @@ export default function Register({navigation}) {
     <View style={styles.container}>
         <Image
             style={styles.logo}
-            source={require('../../assets/images/logo.png')}
+            source={require('../../assets/images/logo-fominha.png')}
         />
         <Text style={styles.text}>Cadastro de Usuário</Text>
         <TextInput
@@ -56,7 +56,7 @@ export default function Register({navigation}) {
 
         <View>
             <Pressable onPress={handleSuccess}>
-                <Text>Possui uma conta? Faça o seu login aqui...</Text>
+                <Text style={styles.smallText}>Possui uma conta? Faça o seu login aqui...</Text>
             </Pressable>
         </View>
 
@@ -74,25 +74,26 @@ const styles = StyleSheet.create({
   },
   logo: {
       width: 200,
-      height: 100,
+      height: 180,
       resizeMode: "contain",
   },
   input: {
       backgroundColor:"white",
       borderColor: "black",
       borderWidth: 2,
-      borderRadius: 5,
+      borderRadius: 50,
       borderBottomColor: "black",
       width: "90%",
       margin: 4,
-      padding: 6,
+      padding: 10,
   },
   text: {
       fontSize: 20,
       textAlign: "center",
       fontWeight: "bold",
-      marginTop: 10,
+      marginTop: 60,
       marginBottom: 20,
+      color:"lightgrey",
   },
   inline: {
       flexDirection: "row",
@@ -113,5 +114,8 @@ textWhite: {
     fontSize: 22,
     color: "purple",
     textAlign: "center",
+},
+smallText:{
+    color:"white",
 }
 });

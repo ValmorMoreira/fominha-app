@@ -6,6 +6,11 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import SearchBox from "../components/SearchBox";
+
+//Efetuar busca em API de receitas para sugestões pro usuário
+//import API_Data_New from "../services/API_Data_New";
+
 
 import apiData from "../data/database.json";
 
@@ -18,7 +23,6 @@ export default function RecipesList() {
   };
 
   const Recipe = ({ item }) => {
-
     return (
       <TouchableOpacity
         style={styles.itemContainer}
@@ -36,7 +40,8 @@ export default function RecipesList() {
 
   return (
     <View style={styles.bg}>
-      <Text style={styles.title}> Receitas </Text>
+      <Text style={styles.title}> Dicas de receitas </Text>
+      <SearchBox />
       <FlatList
         data={apiData}
         renderItem={Recipe}
@@ -48,9 +53,11 @@ export default function RecipesList() {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
+    fontSize: 30,
+    color:"white",
   },
   itemContainer: {
+    margin: 10,
     backgroundColor: "white",
     marginBottom: 8,
     padding: 20,

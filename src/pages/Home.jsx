@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable, SafeAreaView, ScrollView } from "react-native";
+import { StyleSheet, View, Text, Pressable, ScrollView } from "react-native";
 import React from "react";
 
 const login = {
@@ -29,34 +29,31 @@ export default function Home({ navigation }) {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.center}>
-                <View>
-                    <View>
-                        <Text style={styles.textWhite}>Seja Bem Vindo!</Text>
-                        <Text style={styles.textUpperCase}>{login.user}</Text>
-                    </View>
-                    <View>
-                        <Pressable style={styles.btn} onPress={handleRecipeRegister}>
-                            <Text style={styles.textWhite}>Cadastrar receita</Text>
-                        </Pressable>
-                        <Pressable style={styles.btn} onPress={handleRecipesList}>
-                            <Text style={styles.textWhite}>Visualizar receitas</Text>
-                        </Pressable>
-                        <Pressable style={styles.btn} onPress={handleFavorite}>
-                            <Text style={styles.textWhite}>Favoritas</Text>
-                        </Pressable>
-                        <Pressable style={styles.btn} onPress={handleMyRecipes}>
-                            <Text style={styles.textWhite}>Minhas receitas</Text>
-                        </Pressable>
-                        <Pressable style={styles.btn} onPress={handleAbout}>
-                            <Text style={styles.textWhite}>Sobre o App</Text>
-                        </Pressable>
-                    </View>
-                </View>
-            </ScrollView>
-
-        </SafeAreaView>
+        <ScrollView style={styles.container}>
+            <View >
+                <>
+                    <Text style={styles.textHome}>Seja Bem Vindo!</Text>
+                    <Text style={styles.textUpperCase}>{login.user}</Text>
+                </>
+                <>
+                    <Pressable style={styles.btn} onPress={handleRecipeRegister}>
+                        <Text style={styles.textWhite}>Cadastrar receita</Text>
+                    </Pressable>
+                    <Pressable style={styles.btn} onPress={handleRecipesList}>
+                        <Text style={styles.textWhite}>Visualizar receitas</Text>
+                    </Pressable>
+                    <Pressable style={styles.btn} onPress={handleFavorite}>
+                        <Text style={styles.textWhite}>Favoritas</Text>
+                    </Pressable>
+                    <Pressable style={styles.btn} onPress={handleMyRecipes}>
+                        <Text style={styles.textWhite}>Minhas receitas</Text>
+                    </Pressable>
+                    <Pressable style={styles.btn} onPress={handleAbout}>
+                        <Text style={styles.textWhite}>Sobre o App</Text>
+                    </Pressable>
+                </>
+            </View>
+        </ScrollView>
 
     );
 }
@@ -71,6 +68,12 @@ const styles = StyleSheet.create({
         color: "purple",
         textAlign: "center",
     },
+    textHome: {
+        fontSize: 22,
+        color: "white",
+        textAlign: "center",
+        marginTop:50,
+    },
     textUpperCase: {
         fontSize: 45,
         textAlign: "center",
@@ -78,12 +81,9 @@ const styles = StyleSheet.create({
     },
     btn: {
         paddingVertical: 20,
-        borderRadius: 10,
+        borderRadius: 50,
         elevation: 3,
         backgroundColor: "white",
         margin: 15,
     },
-    center:{
-        marginTop:40,
-    }
 });

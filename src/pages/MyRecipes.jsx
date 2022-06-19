@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,12 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  Button
 } from "react-native";
+
+import { ModalContext } from "../components/AppModal";
+
+import SearchBox from "../components/SearchBox";
 
 import Recipes from "../services/sqlite/Recipes";
 
@@ -31,25 +36,51 @@ export default function MyRecipes() {
     //navigation.navigate("Detalhes da receita", { item }); aqui vai direcionar pra tela de detalhes da receita
   };
 
+  const appModal = useContext(ModalContext);
+
+  const handleModal = () => {
+    appModal.show(
+      <View style={styles.modal}>
+        <Text style={styles.recipeTitle}>Nome da receita</Text>
+        <Image style={styles.image}
+          source={require('../../assets/images/default.jpg')}
+        />
+        <View>
+          <Text style={styles.recipeIngredientsAndPrepare}>Ingredientes</Text>
+          <Text>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          </Text>
+          <Text style={styles.recipeIngredientsAndPrepare}>Modo de Preparo</Text>
+          <Text>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          </Text>
+
+        </View>
+        <Button title="Voltar" onPress={() => appModal.hide()} />
+      </View>
+    );
+  };
+
+
   const Recipe = ({ item }) => {
     return (
-      <TouchableOpacity 
-        onPress={() => handleClickRecipe(item)}
+      <TouchableOpacity
+        onPress={() => handleModal()}
       >
         <View style={styles.itemContainer}>
-          <Text style={styles.recipeTitle}> Nome: {item.name}</Text>
-          <View >
-            <Text style={styles.recipeCategory}>Categoria: {item.category}</Text>
-            <Text>Ingredientes: {item.ingredients}</Text>
+          <Text style={styles.recipeTitle}> {item.name}</Text>
+          <View>
+            <Text style={styles.recipeCategory}>Categoria - {item.category}</Text>
           </View>
-          <View style={styles.image}>
-            <Image
-              style={styles.logo}
-              source={require('../../assets/images/logo.png')}
-            />
-            
-          </View>
-          <Text> Clique para ver mais detalhes (Em breve) </Text>
+          <Image
+            style={styles.image}
+            source={require('../../assets/images/default.jpg')}
+          />
+          <Text style={styles.smallText}> Clique para ver mais detalhes</Text>
         </View>
       </TouchableOpacity>
     );
@@ -58,6 +89,7 @@ export default function MyRecipes() {
   return (
     <View style={styles.bg}>
       <Text style={styles.title}></Text>
+      <SearchBox />
       <FlatList
         data={recipesList}
         renderItem={Recipe}
@@ -69,47 +101,52 @@ export default function MyRecipes() {
 
 const styles = StyleSheet.create({
   title: {
-    position:"relative",
     fontSize: 17,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 3,
     marginRight: 5,
     marginLeft: 5,
-    color:"white",
+    color: "white",
   },
   itemContainer: {
     backgroundColor: "white",
     margin: 10,
     marginBottom: 8,
-    padding: 20,
+    padding: 15,
     borderRadius: 5,
-    borderColor: "#000",
-    borderWidth: 1,
-    position:"relative",
   },
   recipeTitle: {
-    fontSize: 16,
+    fontSize: 25,
     fontWeight: "bold",
-    color:"purple",
+    color: "purple",
   },
-  recipeFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  recipeIngredientsAndPrepare: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "purple",
+  },
+  recipeTitleModal: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "white",
   },
   recipeCategory: {
-    color:"brown",
+    color: "brown",
+    marginLeft: 10,
   },
-  image:{
-    width:150,
-    position:"relative",
-    marginLeft: 200,
-    alignItems:"center",
-    paddingVertical: 20,
-    backgroundColor:"black",
+  image: {
+    width: 300,
+    height: 150,
+    resizeMode: "cover",
+    marginLeft: 25,
+
   },
   bg: {
-    backgroundColor:"purple",
-    height:1000,
+    backgroundColor: "purple",
+
+  },
+  smallText: {
+    color: "white",
   }
 });

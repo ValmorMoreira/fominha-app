@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Button, Pressable } from "react-native";
+import { StyleSheet, View, Text, Button, Pressable, Image } from "react-native";
 import React, { useContext } from "react";
 import { ModalContext } from "../components/AppModal";
 
@@ -17,6 +17,10 @@ export default function About() {
 
   return (
     <View style={styles.container}>
+      <Image
+                style={styles.logo}
+                source={require('../../assets/images/logo-fominha.png')}
+            />
       <Text style={styles.text}> Todos os dieritos reservados</Text>
       <Text style={styles.text}>Valmor Moreira</Text>
       <Text style={styles.text}>Fominha - Version 1.0</Text>
@@ -51,4 +55,10 @@ btn: {
     backgroundColor: "white",
     margin: 15,
 },
+logo:{
+  marginBottom:80,
+  width: 300,
+  height: 180,
+  resizeMode: "contain",
+}
 });
