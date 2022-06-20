@@ -84,5 +84,6 @@ const styles = StyleSheet.create({
   },
   bg: {
     backgroundColor: "purple",
+    flex: 1,
   },
 });
