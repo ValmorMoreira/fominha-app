@@ -52,7 +52,14 @@ const update = (id, obj) => {
       //comando SQL modificável
       tx.executeSql(
         "UPDATE recipes SET name=?, category=?, ingredients=?, preparemode=? WHERE id=?;",
-        [obj.name, obj.category, obj.ingredients, obj.preparemode, obj.image, id],
+        [
+          obj.name,
+          obj.category,
+          obj.ingredients,
+          obj.preparemode,
+          obj.image,
+          id,
+        ],
         //-----------------------
         (_, { rowsAffected }) => {
           if (rowsAffected > 0) resolve(rowsAffected);
@@ -103,11 +110,11 @@ const findByName = (name) => {
       //comando SQL modificável
       tx.executeSql(
         "SELECT * FROM recipes WHERE name LIKE ?;",
-        [name],
+        ["%" + name + "%"],
         //-----------------------
         (_, { rows }) => {
           if (rows.length > 0) resolve(rows._array);
-          else reject("Obj not found: brand=" + name); // nenhum registro encontrado
+          else reject("Obj not found: name=" + name); // nenhum registro encontrado
         },
         (_, error) => reject(error) // erro interno em tx.executeSql
       );

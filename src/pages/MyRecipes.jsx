@@ -6,7 +6,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
-  Button
+  Button,
 } from "react-native";
 
 import { ModalContext } from "../components/AppModal";
@@ -16,15 +16,15 @@ import SearchBox from "../components/SearchBox";
 import Recipes from "../services/sqlite/Recipes";
 
 export default function MyRecipes() {
-
   const [recipesList, setRecipesList] = useState([]);
 
   // com Promises
   useEffect(() => {
-    let database = Recipes.all();
-    database.then((database) => {
-      setRecipesList(database);
-    })
+    let query = Recipes.all();
+    query
+      .then((result) => {
+        setRecipesList(result);
+      })
       .catch((error) => {
         alert("Ocorreu um erro ao buscar os items " + "Debug mode: " + error);
       });
@@ -36,49 +36,64 @@ export default function MyRecipes() {
     //navigation.navigate("Detalhes da receita", { item }); aqui vai direcionar pra tela de detalhes da receita
   };
 
+  const onSearch = (searchString) => {
+    let query = Recipes.findByName(searchString);
+    query
+      .then((result) => {
+        setRecipesList(result);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(`Nenhum registro encontrado para ${searchString}!`);
+      });
+  };
+
   const appModal = useContext(ModalContext);
 
   const handleModal = () => {
     appModal.show(
       <View style={styles.modal}>
         <Text style={styles.recipeTitle}>Nome da receita</Text>
-        <Image style={styles.image}
-          source={require('../../assets/images/default.jpg')}
+        <Image
+          style={styles.image}
+          source={require("../../assets/images/default.jpg")}
         />
         <View>
           <Text style={styles.recipeIngredientsAndPrepare}>Ingredientes</Text>
           <Text>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
           </Text>
-          <Text style={styles.recipeIngredientsAndPrepare}>Modo de Preparo</Text>
+          <Text style={styles.recipeIngredientsAndPrepare}>
+            Modo de Preparo
+          </Text>
           <Text>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
           </Text>
-
         </View>
         <Button title="Voltar" onPress={() => appModal.hide()} />
       </View>
     );
   };
 
-
   const Recipe = ({ item }) => {
     return (
-      <TouchableOpacity
-        onPress={() => handleModal()}
-      >
+      <TouchableOpacity onPress={() => handleModal()}>
         <View style={styles.itemContainer}>
           <Text style={styles.recipeTitle}> {item.name}</Text>
           <View>
-            <Text style={styles.recipeCategory}>Categoria - {item.category}</Text>
+            <Text style={styles.recipeCategory}>
+              Categoria - {item.category}
+            </Text>
           </View>
           <Image
             style={styles.image}
-            source={require('../../assets/images/default.jpg')}
+            source={require("../../assets/images/default.jpg")}
           />
           <Text style={styles.smallText}> Clique para ver mais detalhes</Text>
         </View>
@@ -89,7 +104,7 @@ export default function MyRecipes() {
   return (
     <View style={styles.bg}>
       <Text style={styles.title}></Text>
-      <SearchBox />
+      <SearchBox onSearch={onSearch} />
       <FlatList
         data={recipesList}
         renderItem={Recipe}
@@ -102,8 +117,8 @@ export default function MyRecipes() {
 const styles = StyleSheet.create({
   title: {
     fontSize: 17,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginTop: 3,
     marginRight: 5,
     marginLeft: 5,
@@ -140,13 +155,12 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: "cover",
     marginLeft: 25,
-
   },
   bg: {
     backgroundColor: "purple",
-
+    flex: 1,
   },
   smallText: {
     color: "white",
-  }
+  },
 });

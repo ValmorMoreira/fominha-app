@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   input: {
-    fontSize: 20,
+    fontSize: 18,
     marginLeft: 10,
     width: "90%",
   },
