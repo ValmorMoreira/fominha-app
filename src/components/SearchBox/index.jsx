@@ -1,59 +1,53 @@
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { Button, Pressable, StyleSheet, TextInput, View } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
+import { useState } from "react";
 
-import Recipes from '../../services/sqlite/Recipes';
+export default function SearchBox({ onSearch }) {
+  const [searchString, setSearchString] = useState("");
 
-export default function SearchBox() {
+  const handleSearch = () => {
+    if (onSearch) onSearch(searchString);
+  };
 
-    const searchRecipe = () => {
-        Recipes.find({ ingredients: ingredients })
-            .then(id => alert("Receita cadastrada com sucesso!"))
-            .catch(err => console.log(err));
-
-        Recipes.all()
-            .then(recipe => console.log(recipe))
-            .catch(err => console.log(err));
-    };
-
-    return (
-        <View style={styles.searchbar}>
-            <View style={styles.container}>
-            <Feather
-                name="search"
-                size={25}
-                color="black"
-            />
-            <TextInput
-                style={styles.input} placeholder={'Buscar por ingrediente'}
-            />
-        </View>
-        </View>
-        
-    );
+  return (
+    <View style={styles.searchbar}>
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          placeholder={"Buscar por ingrediente"}
+          value={searchString}
+          onChangeText={setSearchString}
+        />
+        <Pressable onPress={handleSearch}>
+          <Feather name="search" size={25} color="black" />
+        </Pressable>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container:{
-        margin: 0,
-        justifyContent: "flex-start",
-        alignItems: "center",
-        flexDirection: "row",
-        width: "90%",
-    },
-    input: {
-        fontSize: 20,
-        marginLeft: 10,
-        width: "90%",
-    },
-    searchbar:{
-        marginBottom:5,
-        padding: 10,
-        flexDirection: "row",
-        width: "80%",
-        backgroundColor: "white",
-        borderRadius: 15,
-        alignItems: "center",
-        justifyContent: "space-evenly",
-        marginLeft:35,
-    },
+  container: {
+    margin: 0,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "row",
+    width: "90%",
+  },
+  input: {
+    fontSize: 20,
+    marginLeft: 10,
+    width: "90%",
+  },
+  searchbar: {
+    marginBottom: 5,
+    padding: 10,
+    flexDirection: "row",
+    width: "80%",
+    backgroundColor: "white",
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    marginLeft: 35,
+  },
 });

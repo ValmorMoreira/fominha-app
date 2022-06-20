@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -11,15 +11,25 @@ import SearchBox from "../components/SearchBox";
 //Efetuar busca em API de receitas para sugestões pro usuário
 //import API_Data_New from "../services/API_Data_New";
 
-
 import apiData from "../data/database.json";
 
-
 export default function RecipesList() {
+  const [flData, setFlData] = useState(apiData);
 
   const handleClickRecipe = (item) => {
     console.log("Clicked on item " + item.name);
     console.log("navigator.navigate para: ", item);
+  };
+
+  const onSearch = (searchString) => {
+    console.log("Search for: ", searchString);
+
+    const filteredData = apiData.filter((item) => {
+      const lowName = item.name.toLowerCase();
+      return lowName.includes(searchString.toLowerCase());
+    });
+
+    setFlData(filteredData);
   };
 
   const Recipe = ({ item }) => {
@@ -37,15 +47,14 @@ export default function RecipesList() {
     );
   };
 
-
   return (
     <View style={styles.bg}>
       <Text style={styles.title}> Dicas de receitas </Text>
-      <SearchBox />
+      <SearchBox onSearch={onSearch} />
       <FlatList
-        data={apiData}
+        data={flData}
         renderItem={Recipe}
-        keyExtractor={(item, index) => index} 
+        keyExtractor={(item, index) => index}
       />
     </View>
   );
@@ -54,16 +63,16 @@ export default function RecipesList() {
 const styles = StyleSheet.create({
   title: {
     fontSize: 30,
-    color:"white",
+    color: "white",
   },
   itemContainer: {
     margin: 10,
     backgroundColor: "white",
     marginBottom: 8,
     padding: 20,
-    borderRadius: 5, 
+    borderRadius: 5,
     borderColor: "#000",
-    borderWidth:1,
+    borderWidth: 1,
   },
   recipeTitle: {
     fontSize: 16,
@@ -73,7 +82,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  bg:{
-    backgroundColor:"purple",
-  }
+  bg: {
+    backgroundColor: "purple",
+  },
 });

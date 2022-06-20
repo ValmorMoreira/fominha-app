@@ -14,7 +14,7 @@ import {
 export default function RecipesList({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
 
   const handleRegister = () => {
     navigation.navigate("Cadastro");
