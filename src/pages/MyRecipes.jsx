@@ -151,10 +151,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   image: {
-    width: 300,
+    // width: 300,
+    // height: 150,
     height: 150,
+    flex: 1,
+    width: null,
     resizeMode: "cover",
-    marginLeft: 25,
+    margin: 8,
   },
   bg: {
     backgroundColor: "purple",
