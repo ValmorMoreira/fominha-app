@@ -25,7 +25,7 @@ export default function RecipesList({ navigation }) {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.bg}>
       <View style={styles.container}>
         <Image
           style={styles.logo}
@@ -82,9 +82,8 @@ export default function RecipesList({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "purple",
     alignItems: "center",
-    justifyContent: "center",
+    marginTop:50,
   },
   logo: {
     width: 300,
@@ -132,4 +131,7 @@ const styles = StyleSheet.create({
   smallText: {
     color: "white",
   },
+  bg:{
+    backgroundColor:"purple",
+  }
 });

@@ -29,8 +29,8 @@ export default function Home({ navigation }) {
     };
 
     return (
-        <ScrollView style={styles.container}>
-            <View >
+        <ScrollView style={styles.bg}>
+            <View style={styles.container}>
                 <>
                     <Text style={styles.textHome}>Seja Bem Vindo!</Text>
                     <Text style={styles.textUpperCase}>{login.user}</Text>
@@ -54,14 +54,12 @@ export default function Home({ navigation }) {
                 </>
             </View>
         </ScrollView>
-
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "purple",
     },
     textWhite: {
         fontSize: 22,
@@ -86,4 +84,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         margin: 15,
     },
+    bg:{
+        backgroundColor:"purple",
+    }
 });

@@ -8,9 +8,6 @@ import {
 } from "react-native";
 import SearchBox from "../components/SearchBox";
 
-//Efetuar busca em API de receitas para sugestões pro usuário
-//import API_Data_New from "../services/API_Data_New";
-
 import apiData from "../data/database.json";
 
 export default function RecipesList() {
