@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,12 +8,24 @@ import {
 } from "react-native";
 import SearchBox from "../components/SearchBox";
 
+import api from "../services/api";
 import apiData from "../data/database.json";
 
+
 export default function RecipesList() {
+
   const [flData, setFlData] = useState(apiData);
 
-  const handleClickRecipe = (item) => {
+  const [burguers, setBurguers] = useState([]);
+
+  useEffect(() => {
+    api.get("/cars").then((response) => {
+      setBurguers(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
+   const handleClickRecipe = (item) => {
     console.log("Clicked on item " + item.name);
     console.log("navigator.navigate para: ", item);
   };
@@ -51,7 +63,7 @@ export default function RecipesList() {
       <FlatList
         data={flData}
         renderItem={Recipe}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(_item, index) => index}
       />
     </View>
   );

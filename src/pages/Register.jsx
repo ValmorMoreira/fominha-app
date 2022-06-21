@@ -8,7 +8,6 @@ export default function Register({navigation}) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  //const [image, setImage] = useState(null);
 
   const handleSuccess = () => {
     navigation.navigate("Login");
@@ -20,7 +19,7 @@ export default function Register({navigation}) {
 
   const create = () => {
     Users.create({ name: name, email: email,  password: password })
-      .then(id => alert("Usuário cadastrado com sucesso!"))
+      .then(id => alert("Usuário " + id + " cadastrado com sucesso!"))
       .catch(err => console.log(err));
 
     Users.all()
@@ -43,7 +42,7 @@ export default function Register({navigation}) {
             style={styles.input} placeholder={'Nome de usuário'} onChangeText={event => setName(event)} onChange={setName} value={name}
         />
         <TextInput
-            style={styles.input} placeholder={'E-mail'} onChangeText={event => setEmail(event)} onChange={setEmail} value={email}
+            style={styles.input}  placeholder={'E-mail'} onChangeText={event => setEmail(event)} onChange={setEmail} value={email}
         />
 
         <TextInput

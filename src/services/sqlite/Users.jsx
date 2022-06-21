@@ -10,7 +10,7 @@ import user from "./SQLiteDatabse";
     //<<<<<<<<<<<<<<<<<<<<<<<< USE ISSO APENAS DURANTE OS TESTES!!! >>>>>>>>>>>>>>>>>>>>>>>
   
     tx.executeSql(
-      "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, email VARCHAR(50), username VARCHAR(50) UNIQUE, password VARCHAR(50));"
+      "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50), email VARCHAR(50), password VARCHAR(50));"
     );
   });
 
@@ -91,24 +91,24 @@ const create = (obj) => {
   };
   
   /**
-   * BUSCA UM REGISTRO POR MEIO DO NOME (name)
-   * - Recebe o nome do usuário;
+   * BUSCA UM REGISTRO POR MEIO DO EMAIL E PASSWORD VÁLIDOS
+   * - Recebe o nome do email e senha do usuário;
    * - Retorna uma Promise:
    *  - O resultado da Promise é um array com os objetos encontrados;
-   *  - Pode retornar erro (reject) caso o ID não exista ou então caso ocorra erro no SQL;
+   *  - Pode retornar erro (reject) caso o email e senha não sejam válidos ou então caso ocorra erro no SQL;
    *  - Pode retornar um array vazio caso nenhum objeto seja encontrado.
    */
-  const findByName = (name) => {
+   const findLogin = (email,password) => {
     return new Promise((resolve, reject) => {
       user.transaction((tx) => {
         //comando SQL modificável
         tx.executeSql(
-          "SELECT * FROM users WHERE name LIKE ?;",
-          [name],
+          "SELECT * FROM users WHERE email = ? AND password = ? ;",
+          [email, password],
           //-----------------------
           (_, { rows }) => {
             if (rows.length > 0) resolve(rows._array);
-            else reject("Obj not found: brand=" + name); // nenhum registro encontrado
+            else reject("Obj not found: password"); // nenhum registro encontrado
           },
           (_, error) => reject(error) // erro interno em tx.executeSql
         );
@@ -129,7 +129,7 @@ const create = (obj) => {
       user.transaction((tx) => {
         //comando SQL modificável
         tx.executeSql(
-          "SELECT * FROM recipes;",
+          "SELECT * FROM users;",
           [],
           //-----------------------
           (_, { rows }) => resolve(rows._array),
@@ -167,7 +167,7 @@ const create = (obj) => {
     create,
     update,
     find,
-    findByName,
+    findLogin,
     all,
     remove,
   };

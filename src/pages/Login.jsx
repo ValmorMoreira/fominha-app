@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,7 +6,6 @@ import {
   Image,
   TextInput,
   Pressable,
-  Button,
   Switch,
   ScrollView,
 } from "react-native";
@@ -21,7 +20,9 @@ export default function RecipesList({ navigation }) {
   };
 
   const handleLoginValidate = () => {
-    navigation.navigate("Home");
+
+      navigation.navigate("Home");
+    
   };
 
   return (
@@ -44,7 +45,7 @@ export default function RecipesList({ navigation }) {
           style={styles.input}
           placeholder={"Password"}
           secureTextEntry={true}
-          onChangeText={(e) => setPassword(e)}
+          onChangeText={(event) => setPassword(event)}
           value={password}
         />
 

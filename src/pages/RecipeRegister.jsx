@@ -19,7 +19,7 @@ export default function RecipeRegister({ navigation }) {
 
   const create = () => {
     Recipes.create({ name: name, category: category, ingredients: ingredients, preparemode: preparemode })
-      .then(id => alert("Receita cadastrada com sucesso!" + id))
+      .then(id => alert("Receita " + id + " cadastrada com sucesso!"))
       .catch(err => console.log(err));
 
     Recipes.all()

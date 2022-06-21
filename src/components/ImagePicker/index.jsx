@@ -6,8 +6,6 @@ export default function ImagePickerCustom() {
 
   const [image, setImage] = useState(null);
 
-  console.log("Estou testando o recurso e preciso ajustar o layout no retorno da imagem selecionada");
-
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -26,7 +24,7 @@ export default function ImagePickerCustom() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button disabled title="Selecione uma foto" onPress={pickImage} />
+      <Button  title="Selecione uma foto" onPress={pickImage} />
       {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, marginTop: 100 }} />}
     </View>
   );
