@@ -7,23 +7,20 @@ import {
   TouchableOpacity,
 } from "react-native";
 import SearchBox from "../components/SearchBox";
+import axios from "axios";
 
 import api from "../services/api";
-import apiData from "../data/database.json";
-
 
 export default function RecipesList() {
 
-  const [flData, setFlData] = useState(apiData);
-
-  const [burguers, setBurguers] = useState([]);
+  const [flData, setFlData] = useState([]);
 
   useEffect(() => {
-    api.get("/cars").then((response) => {
-      setBurguers(response.data);
-      console.log(response.data);
+    axios.request(api).then((response) => {
+      setFlData(response.data);
     });
   }, []);
+
 
    const handleClickRecipe = (item) => {
     console.log("Clicked on item " + item.name);
@@ -33,8 +30,11 @@ export default function RecipesList() {
   const onSearch = (searchString) => {
     console.log("Search for: ", searchString);
 
-    const filteredData = apiData.filter((item) => {
+    const filteredData = flData.filter((item) => {
       const lowName = item.name.toLowerCase();
+      if(filteredData == []){
+        return  alert('eita');
+      }
       return lowName.includes(searchString.toLowerCase());
     });
 
@@ -47,10 +47,13 @@ export default function RecipesList() {
         style={styles.itemContainer}
         onPress={() => handleClickRecipe(item)}
       >
-        <Text style={styles.recipeTitle}>{item.name}</Text>
-
-        <View style={styles.recipeFooter}>
-          <Text>{item.text}</Text>
+        <Text style={styles.burgerTitle}>{item.name}</Text>
+        <View style={styles.burgerContent}>
+          <Text>Ingredientes: </Text>
+          <Text> {item.ingredients} </Text>
+        </View>
+        <View >
+          <Text style={styles.burgerFooter}>Restaurante: {item.restaurant}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -58,7 +61,7 @@ export default function RecipesList() {
 
   return (
     <View style={styles.bg}>
-      <Text style={styles.title}> Dicas de receitas </Text>
+      <Text style={styles.title}>Dicas de Burgers </Text>
       <SearchBox onSearch={onSearch} />
       <FlatList
         data={flData}
@@ -73,23 +76,33 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     color: "white",
+    textAlign:"center",
+    margin:5,
   },
   itemContainer: {
     margin: 10,
-    backgroundColor: "white",
-    marginBottom: 8,
-    padding: 20,
-    borderRadius: 5,
+    backgroundColor: "lightblue",
+    marginBottom: 2,
+    padding: 15,
+    borderRadius: 15,
     borderColor: "#000",
     borderWidth: 1,
   },
-  recipeTitle: {
+  burgerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    padding:10,
+  },
+  burgerContent: {
     fontSize: 16,
     fontWeight: "bold",
+    backgroundColor:"white",
+    borderRadius:20,
+    margin:2,
+    padding:10,
   },
-  recipeFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  burgerFooter: {
+    color:"blue",
   },
   bg: {
     backgroundColor: "purple",

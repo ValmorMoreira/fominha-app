@@ -14,7 +14,7 @@ export default function SearchBox({ onSearch }) {
       <View style={styles.container}>
         <TextInput
           style={styles.input}
-          placeholder={"Buscar por ingrediente"}
+          placeholder={"Buscar por nome"}
           value={searchString}
           onChangeText={setSearchString}
         />

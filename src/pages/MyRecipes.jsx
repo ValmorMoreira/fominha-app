@@ -30,11 +30,6 @@ export default function MyRecipes() {
       });
   }, []);
 
-  const handleClickRecipe = (item) => {
-    console.log("Clicked on item " + JSON.stringify(item));
-    console.log("navigator.navigate para: ", item.id);
-    //navigation.navigate("Detalhes da receita", { item }); aqui vai direcionar pra tela de detalhes da receita
-  };
 
   const onSearch = (searchString) => {
     let query = Recipes.findByName(searchString);
@@ -53,7 +48,7 @@ export default function MyRecipes() {
   const handleModal = () => {
     appModal.show(
       <View style={styles.modal}>
-        <Text style={styles.recipeTitle}>Nome da receita</Text>
+        <Text style={styles.recipeTitle}>Nome da Receita</Text>
         <Image
           style={styles.image}
           source={require("../../assets/images/default.jpg")}

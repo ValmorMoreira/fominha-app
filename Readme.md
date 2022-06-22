@@ -37,12 +37,6 @@
 
 ![This is a alt text.](/assets/wireframes/recipe-edit.png "Tela de edição de receitas.")
 
-## Favoritas
-
-### Nesta tela o usuário tem acesso as receitas que deu "like" (favoritou).
-
-![This is a alt text.](/assets/wireframes/favorite.png "Tela de receitas favoritas.")
-
 ## Tela detalhes da receita
 
 ![This is a alt text.](/assets/wireframes/recipe-description.png "Tela detalhes da receita.")

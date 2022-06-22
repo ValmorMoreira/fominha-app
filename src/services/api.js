@@ -1,7 +1,10 @@
-import axios from "axios";
+const options = {
+  method: 'GET',
+  url: 'https://burgers1.p.rapidapi.com/burgers',
+  headers: {
+    'X-RapidAPI-Key': '064063e3acmsh75cc32a26f9f946p1dfcdbjsn7e7745d2f48c',
+    'X-RapidAPI-Host': 'burgers1.p.rapidapi.com'
+  }
+};
 
-const api = axios.create({
-  baseURL: "https://pdm-cars-api.herokuapp.com",
-});
-
-export default api;
+export default options;

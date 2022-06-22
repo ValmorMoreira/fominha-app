@@ -17,15 +17,15 @@ export default function Home({ navigation }) {
     };
 
     const handleRecipesList = () => {
-        navigation.navigate("Visualizar receitas");
-    };
-
-    const handleFavorite = () => {
-        navigation.navigate("Favoritas");
+        navigation.navigate("Dicas de Burgers");
     };
 
     const handleMyRecipes = () => {
         navigation.navigate("Minhas receitas");
+    };
+
+    const handleLogout = () => {
+        navigation.navigate("Login");
     };
 
     return (
@@ -40,16 +40,16 @@ export default function Home({ navigation }) {
                         <Text style={styles.textWhite}>Cadastrar receita</Text>
                     </Pressable>
                     <Pressable style={styles.btn} onPress={handleRecipesList}>
-                        <Text style={styles.textWhite}>Visualizar receitas</Text>
-                    </Pressable>
-                    <Pressable style={styles.btn} onPress={handleFavorite}>
-                        <Text style={styles.textWhite}>Favoritas</Text>
+                        <Text style={styles.textWhite}>Dicas de Burgers</Text>
                     </Pressable>
                     <Pressable style={styles.btn} onPress={handleMyRecipes}>
                         <Text style={styles.textWhite}>Minhas receitas</Text>
                     </Pressable>
                     <Pressable style={styles.btn} onPress={handleAbout}>
                         <Text style={styles.textWhite}>Sobre o App</Text>
+                    </Pressable>
+                    <Pressable style={styles.btn} onPress={handleLogout}>
+                        <Text style={styles.textWhite}>Sair</Text>
                     </Pressable>
                 </>
             </View>
