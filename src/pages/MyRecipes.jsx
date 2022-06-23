@@ -15,10 +15,25 @@ import SearchBox from "../components/SearchBox";
 
 import Recipes from "../services/sqlite/Recipes";
 
-export default function MyRecipes() {
+export default function MyRecipes({ navigation }) {
+
+  const appModal = useContext(ModalContext);
+
   const [recipesList, setRecipesList] = useState([]);
 
-  // com Promises
+  
+
+  const handleSuccessDelete = () => {
+    appModal.hide();
+    navigation.navigate("Minhas receitas");
+  };
+
+  const handleRecipeEdit = () => {
+    appModal.hide();
+    navigation.navigate("Editar Receita");
+  };
+
+   // com Promises
   useEffect(() => {
     let query = Recipes.all();
     query
@@ -43,42 +58,20 @@ export default function MyRecipes() {
       });
   };
 
-  const appModal = useContext(ModalContext);
-
-  const handleModal = () => {
-    appModal.show(
-      <View style={styles.modal}>
-        <Text style={styles.recipeTitle}>Nome da Receita</Text>
-        <Image
-          style={styles.image}
-          source={require("../../assets/images/default.jpg")}
-        />
-        <View>
-          <Text style={styles.recipeIngredientsAndPrepare}>Ingredientes</Text>
-          <Text>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </Text>
-          <Text style={styles.recipeIngredientsAndPrepare}>
-            Modo de Preparo
-          </Text>
-          <Text>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </Text>
-        </View>
-        <Button title="Voltar" onPress={() => appModal.hide()} />
-      </View>
-    );
+  const onDelete = (id) => {
+    Recipes.remove(id)
+      .then(id => alert("Receita " + id + " deletada com sucesso!"))
+      .catch((error) => {
+        console.log(error);
+        alert(`Nenhum registro encontrado para ${id}!`);
+      });
+      handleSuccessDelete();
   };
+
 
   const Recipe = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => handleModal()}>
+      <TouchableOpacity onPress={() => handleModal(item)}>
         <View style={styles.itemContainer}>
           <Text style={styles.recipeTitle}> {item.name}</Text>
           <View>
@@ -93,6 +86,48 @@ export default function MyRecipes() {
           <Text style={styles.smallText}> Clique para ver mais detalhes</Text>
         </View>
       </TouchableOpacity>
+    );
+  };
+
+  const handleModal = (item) => {
+
+    appModal.show(
+      <View style={styles.modal}>
+        <Text style={styles.recipeTitle}>{item.name}</Text>
+        <View style={styles.imageLimit}>
+        <Image
+          style={styles.image}
+          source={require("../../assets/images/default.jpg")}
+        />
+        </View>        
+        <View>
+          <Text style={styles.recipeIngredientsAndPrepare}>Ingredientes</Text>
+          <Text>
+            {item.ingredients}
+          </Text>
+          <Text style={styles.recipeIngredientsAndPrepare}>
+            Modo de Preparo
+          </Text>
+          <Text>
+            {item.preparemode}
+          </Text>
+        </View>
+        <View style={styles.btnContainer}>
+          <View style={styles.buttons}>
+            <Button  title="Editar" onPress={() => 
+              handleRecipeEdit()} />
+          </View>
+          <View style={styles.buttons}>
+            <Button color={"red"} title="Deletar" onPress={() => 
+              onDelete(item.id)} />
+          </View>
+          <View style={styles.buttons}>
+            <Button color={"green"} title="Voltar" onPress={() => appModal.hide()} />
+          </View>
+
+        </View>
+
+      </View>
     );
   };
 
@@ -146,13 +181,14 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   image: {
-    // width: 300,
-    // height: 150,
     height: 150,
     flex: 1,
     width: null,
     resizeMode: "cover",
     margin: 8,
+  },
+  imageLimit:{
+    height:"60%",
   },
   bg: {
     backgroundColor: "purple",
@@ -161,4 +197,12 @@ const styles = StyleSheet.create({
   smallText: {
     color: "white",
   },
+  btnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    margin: 25,
+  },
+  buttons: {
+    width: "30%",
+  }
 });

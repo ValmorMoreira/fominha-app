@@ -3,9 +3,10 @@ import React, { useState, createContext } from "react";
 
 export const ModalContext = createContext();
 
-export default function AppModal({ children }) {
+export default function AppModal({children}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState(null);
+
 
   const appModal = {
     show: (content) => {
@@ -18,7 +19,7 @@ export default function AppModal({ children }) {
   return (
     <ModalContext.Provider value={appModal}>
       <Modal
-        animationType="fade"
+        animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
@@ -38,11 +39,11 @@ export default function AppModal({ children }) {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 20,
-    backgroundColor: "purple",
-    borderRadius: 5,
-    padding:5,
-    alignItems: "center",
+    margin: 10,
+    backgroundColor:"darkgrey",
+    borderRadius: 10,
+    padding:8,
+    alignItems:"flex-start",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -54,11 +55,12 @@ const styles = StyleSheet.create({
   },
   content: {
     width: "100%",
-    height: "100%",
+    height: "95%",
     backgroundColor: "white",
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "space-around",
+    padding:5,
   },
   recipeName:{
     fontSize:25,

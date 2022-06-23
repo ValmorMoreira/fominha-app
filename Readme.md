@@ -72,7 +72,7 @@ _O design UX ainda está em fase inicial, então seria uma pequena evoçução d
 
 #### Alertas de erros - 08/06/2022 ✅
 
-#### Imagens das receitas - 12/06/2022 (Em progresso)
+#### Imagens das receitas -  (Em progresso...)
 
 ### Projeto final - (Em andamento)
 
@@ -90,19 +90,30 @@ _O design UX ainda está em fase inicial, então seria uma pequena evoçução d
 
 ### Alert, Modal e ActionSheet
 
-#### Modal implementado com sucesso na tela do "About" falta apenas estilizar.
+#### Modal implementado com sucesso na tela do "About" falta apenas estilizar e também na descrição das receitas do usuário.
 
-#### Também utilizando "Alert" para notificar que a receita foi cadastrada com sucesso.
+#### Também utilizando "Alert" para notificar que a receita foi cadastrada com sucesso e outros avisos de erro ou de sucesso.
 
 ### Acesso à API Remota
 
-#### Uso da API remota talvez para  busca de imagens dos ingredientes das receitas, ainda não defini algo para utilizar este acesso.
+#### Estou utilizando uma API do rapidapi chamada de "Burgers" que retorna uma lista de burgers.
 
 ### Recurso inédito
 
-#### Uso de Image Picker e Câmera do Smartphone para salvar foto de receita. Provavelmente criarei um componente separado para adicionar esta funcionalidade, assim como um componente "Search" para filtros.
+#### Foi criado um componente de busca para filtrar as receitas, e também estou aplicando o uso do ImagePicker para salvar e cadastrar a imagem das receitas.
 
-#### Estou testando utilizar este recurso https://docs.expo.dev/versions/latest/sdk/imagepicker/
+##### Estou testando utilizar este recurso https://docs.expo.dev/versions/latest/sdk/imagepicker/
+
+#### Tradução do APP para inglês e português em andamento no projeto...
+
+## Observções
+
+#### Ainda falta atualizar os prints das telas com o visual novo aqui no ReadMe.md
+
+#### Também falta ainda a validação do login e de formulários.
+
+#### Buscando solução atualmente para enviar os proops do modal da receita selecionada, para a tela de editar receita e posteriormente chamar o método UPDATE do SQLITE.
+
 
 
 

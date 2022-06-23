@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Image, View, Text } from 'react-native';
+import { Button, Image, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 export default function ImagePickerCustom() {

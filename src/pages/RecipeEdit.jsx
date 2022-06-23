@@ -1,32 +1,39 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  Image,
+  ScrollView
+} from 'react-native';
 
 import Recipes from '../services/sqlite/Recipes';
 
 
-export default function RecipeEdit({navigation}) {
+export default function RecipeEdit({ navigation }) {
+
+
 
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [preparemode, setPrepareMode] = useState('');
   const [image, setImage] = useState('');
-  const [isEnabled, setIsEnabled] = useState(true);
-
 
   const handleSuccess = () => {
     navigation.navigate("Minhas receitas");
   };
 
   const edit = () => {
-    Recipes.edit( {name:name, category:category, ingredients:ingredients, preparemode:preparemode})
-    .then(id => console.log('Receita: ' + name + ' Atualizada com sucesso!'))
-    .catch( err => console.log(err));
+    Recipes.edit({ name: name, category: category, ingredients: ingredients, preparemode: preparemode })
+      .then(id => console.log('Receita: ' + name + ' Atualizada com sucesso!'))
+      .catch(err => console.log(err));
 
     Recipes.all()
-    .then( recipe => console.log(recipe))
-    .catch( err => console.log(err));
+      .then(recipe => console.log(recipe))
+      .catch(err => console.log(err));
 
     handleSuccess();
   };
@@ -34,10 +41,13 @@ export default function RecipeEdit({navigation}) {
 
   return (
 
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
+    <ScrollView style={styles.container}>
+      <Image
+        style={styles.logo}
+        source={require('../../assets/images/logo-fominha.png')}
+      />
 
-      <Text style={styles.text}>Prencha os dados da receita</Text>
+      <Text style={styles.text}>Atualize os dados da receita</Text>
       <TextInput
         style={styles.input} placeholder={name} onChangeText={setName} value={name}
       />
@@ -58,7 +68,6 @@ export default function RecipeEdit({navigation}) {
         <View >
           <Button title={"Alterar imagem"} onPress={() =>
             console.log("Nome da receita " + name + "  Categoria: " + category)}
-            disabled={!isEnabled}
           />
         </View>
         <View>
@@ -67,42 +76,42 @@ export default function RecipeEdit({navigation}) {
         <View>
           <Button title={"Atualizar"} onPress={() =>
             edit()}
-            disabled={!isEnabled}
           />
         </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#AFAFAF",
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "purple",
   },
   logo: {
     width: 200,
-    height: 100,
+    height: 140,
     resizeMode: "contain",
+    marginTop: 20,
+    marginLeft: 80,
   },
   input: {
     backgroundColor: "white",
     borderColor: "lightgrey",
     borderWidth: 2,
-    borderRadius: 5,
+    borderRadius: 50,
     borderBottomColor: "lightgrey",
     width: "90%",
     margin: 10,
-    padding: 20,
+    padding: 15,
   },
   text: {
     fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
-    marginTop: 10,
+    marginTop: 40,
     marginBottom: 20,
+    color: "lightgrey",
   },
   inline: {
     flexDirection: "row",
@@ -112,6 +121,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
-    flexDirection:"row",
+    flexDirection: "row",
+    marginLeft: 50,
   }
 });

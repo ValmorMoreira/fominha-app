@@ -11,7 +11,7 @@ export default function RecipeRegister({ navigation }) {
   const [category, setCategory] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [preparemode, setPrepareMode] = useState('');
-  //const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null);
 
   const handleSuccess = () => {
     navigation.navigate("Minhas receitas");
