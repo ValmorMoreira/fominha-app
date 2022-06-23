@@ -10,51 +10,49 @@
 
 ##### Aqui o usuário vai efetuar seu cadastro no App
 
-![This is a alt text.](/assets/wireframes/register.png "Tela de cadastro.")
+<img src="./assets/wireframes/register.png " width="300">
 
 ## Login 
 
 ##### Aqui o usuário vai efetuar seu login no App
 
-![This is a alt text.](/assets/wireframes/login.png "Tela de login.")
-
+<img src="./assets/wireframes/login.png " width="300">
 
 ## Tela Home
 
 ##### Aqui o usuário recebe as boas vindas após o login e tem alguns botões "call to action" para interagir com o app.
 
-![This is a alt text.](/assets/wireframes/home.png "Home.")
+<img src="./assets/wireframes/home.png " width="300">
 
 ## Cadastrar receita
 
 ### Esta tela vai se comunicar com o banco de dados para registrar a receita do usuário.
 
-![This is a alt text.](/assets/wireframes/recipe-register.png "Tela de cadastro de receitas.")
+<img src="./assets/wireframes/recipe-register.png " width="300">
 
 ## Editar receita
 
 ### Esta tela o usuário pode corrigir erros ou complementar uma receita já cadastrada por ele no app.
 
-![This is a alt text.](/assets/wireframes/recipe-edit.png "Tela de edição de receitas.")
+<img src="./assets/wireframes/recipe-edit.png " width="300">
+
+#### Esta tela ainda está em desenvolvimento...
 
 ## Tela detalhes da receita
 
-![This is a alt text.](/assets/wireframes/recipe-description.png "Tela detalhes da receita.")
+<img src="./assets/wireframes/recipe-description.png " width="300">
 
 ## Listagem das receitas
 
 ##### Nesta tela serão listadas as receitas já cadastradas, o usuário terá a possibilidade de clicar em uma para abrir a descrição dela e favoritar se desejar. 
 
-![This is a alt text.](/assets/wireframes/recipes-list.png "Listagem das receitas.")
-
+<img src="./assets/wireframes/recipes-list.png " width="300">
 
 ### Sobre
 
 ##### Tela de informação apenas da versão, desenvolvedor ou agradecimentos.
 
-![This is a alt text.](/assets/wireframes/about.png "Tela sobre.")
-
-_O design UX ainda está em fase inicial, então seria uma pequena evoçução do sketch "esboço a lápis" do design final._
+<img src="./assets/wireframes/about.png " width="300">
 
 ## Cronograma de desenvolvimento
 
