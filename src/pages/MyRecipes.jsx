@@ -21,8 +21,7 @@ export default function MyRecipes({ navigation }) {
   const [recipesList, setRecipesList] = useState([]);
   // const [recipeData, setRecipeData] = useState([]);
 
-  // com Promises
-  useEffect(() => {
+  const refreshRecipesList = () => {
     let query = Recipes.all();
     query
       .then((result) => {
@@ -31,6 +30,11 @@ export default function MyRecipes({ navigation }) {
       .catch((error) => {
         alert("Ocorreu um erro ao buscar os items " + "Debug mode: " + error);
       });
+  };
+
+  // com Promises
+  useEffect(() => {
+    refreshRecipesList();
   }, []);
 
   const handleSuccessDelete = () => {
@@ -61,7 +65,10 @@ export default function MyRecipes({ navigation }) {
 
   const onDelete = (id) => {
     Recipes.remove(id)
-      .then((id) => alert("Receita " + id + " deletada com sucesso!"))
+      .then((id) => {
+        alert("Receita " + id + " deletada com sucesso!");
+        refreshRecipesList();
+      })
       .catch((error) => {
         console.log(error);
         alert(`Nenhum registro encontrado para ${id}!`);
