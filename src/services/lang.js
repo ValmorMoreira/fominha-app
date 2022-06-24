@@ -39,6 +39,7 @@ i18n.translations = {
     searchError: "No results found for: ",
     updatePhoto: "Change photo",
     updateRecipeDetails: "Update recipe details",
+    clickDetails: "Click here for more details",
 
   },
   "pt-BR": {
@@ -77,6 +78,7 @@ i18n.translations = {
     searchError: "Não foram encontrados resultados para: ",
     updatePhoto: "Atualizar foto",
     updateRecipeDetails: "Atualize os dados da receita",
+    clickDetails: "Clique aqui para mais detalhes",
 
 
   },

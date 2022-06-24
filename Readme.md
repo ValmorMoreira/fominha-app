@@ -36,17 +36,22 @@
 
 <img src="./assets/wireframes/recipe-edit.png " width="300">
 
-#### Esta tela ainda está em desenvolvimento...
-
 ## Tela detalhes da receita
 
 <img src="./assets/wireframes/recipe-description.png " width="300">
 
 ## Listagem das receitas
 
-##### Nesta tela serão listadas as receitas já cadastradas, o usuário terá a possibilidade de clicar em uma para abrir a descrição dela e favoritar se desejar. 
+##### Nesta tela serão listadas as receitas já cadastradas, o usuário terá a possibilidade de clicar em uma para abrir a descrição dela. 
 
 <img src="./assets/wireframes/recipes-list.png " width="300">
+
+### API Burgers 
+
+<img src="./assets/wireframes/burgers-list.png " width="300">
+
+#### Aqui serão listados burgers como sugestão para o usuário.
+##### https://rapidapi.com/coltla/api/burgers1/
 
 ### Sobre
 

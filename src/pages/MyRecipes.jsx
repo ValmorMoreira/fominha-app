@@ -17,21 +17,11 @@ import Recipes from "../services/sqlite/Recipes";
 
 export default function MyRecipes({ navigation }) {
 
-  const appModal = useContext(ModalContext);
+
+ const appModal = useContext(ModalContext);
 
   const [recipesList, setRecipesList] = useState([]);
-
-  
-
-  const handleSuccessDelete = () => {
-    appModal.hide();
-    navigation.navigate("Minhas receitas");
-  };
-
-  const handleRecipeEdit = () => {
-    appModal.hide();
-    navigation.navigate("Editar Receita");
-  };
+  const [recipeData, setRecipeData] = useState([]);
 
    // com Promises
   useEffect(() => {
@@ -45,6 +35,19 @@ export default function MyRecipes({ navigation }) {
       });
   }, []);
 
+  const handleSuccessDelete = () => {
+    appModal.hide();
+    navigation.navigate("Minhas receitas");
+  };
+
+  //Aqui estou perdido no código 
+  const handleRecipeEdit = (obj) => {
+    console.log("No modal este cara é: " + {obj} );
+    setRecipeData({obj});
+    console.log("Aqui depois de useState ficou ... " + recipeData.name);
+    appModal.hide();
+    navigation.navigate("Editar Receita", {recipeData});
+  };
 
   const onSearch = (searchString) => {
     let query = Recipes.findByName(searchString);
@@ -114,8 +117,9 @@ export default function MyRecipes({ navigation }) {
         </View>
         <View style={styles.btnContainer}>
           <View style={styles.buttons}>
-            <Button  title="Editar" onPress={() => 
-              handleRecipeEdit()} />
+            <Button  title="Editar" onPress={() =>
+              handleRecipeEdit(item)} 
+            />
           </View>
           <View style={styles.buttons}>
             <Button color={"red"} title="Deletar" onPress={() => 
@@ -195,7 +199,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   smallText: {
-    color: "white",
+    color: "purple",
   },
   btnContainer: {
     flexDirection: 'row',

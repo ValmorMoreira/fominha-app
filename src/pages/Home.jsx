@@ -1,12 +1,9 @@
 import { StyleSheet, View, Text, Pressable, ScrollView } from "react-native";
 import React from "react";
 
-const login = {
-    user: "Valmor",
-    message: "Thanks for passing params!",
-};
+export default function Home({navigation , route}) {
 
-export default function Home({ navigation }) {
+    const { user } = route.params;
 
     const handleAbout = () => {
         navigation.navigate("About");
@@ -33,7 +30,7 @@ export default function Home({ navigation }) {
             <View style={styles.container}>
                 <>
                     <Text style={styles.textHome}>Seja Bem Vindo!</Text>
-                    <Text style={styles.textUpperCase}>{login.user}</Text>
+                    <Text style={styles.textUpperCase}>{user.name}</Text>
                 </>
                 <>
                     <Pressable style={styles.btn} onPress={handleRecipeRegister}>

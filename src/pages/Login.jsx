@@ -10,10 +10,27 @@ import {
   ScrollView,
 } from "react-native";
 
+import Users from "../services/sqlite/Users";
+
+
 export default function RecipesList({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEnabled, setIsEnabled] = useState(true);
+  const [user, setUser] = useState([]);
+
+
+  useEffect(() => {
+    let query = Users.findLogin(email);
+    query
+      .then((result) => {
+        setUser(result);
+      })
+      .catch((error) => {
+        alert("Ocorreu um erro ao buscar o usuário " + "Debug mode: " + error);
+      });
+  });
+
 
   const handleRegister = () => {
     navigation.navigate("Cadastro");
@@ -21,8 +38,25 @@ export default function RecipesList({ navigation }) {
 
   const handleLoginValidate = () => {
 
-      navigation.navigate("Home");
-    
+    console.log("Usuário \n" + user.name);
+
+    console.log("Login de --> " + user.email + " " + user.password);
+
+    if (email != "" && password != "") {
+      if (email != "" && password != "") {
+        if (email === user.email && password === user.password) {
+          alert("Deu boa!!!");
+          navigation.navigate("Home", { user });
+        }
+        else {
+          alert("Usuário ou Senha inválidos!");
+        }
+      }
+    } else {
+      alert("Por favor preencher os campos");
+    }
+
+
   };
 
   return (
@@ -36,8 +70,7 @@ export default function RecipesList({ navigation }) {
         <TextInput
           style={styles.input}
           placeholder={"E-mail"}
-          onChangeText={(event) => setEmail(event)}
-          onChange={setEmail}
+          onChangeText={setEmail}
           value={email}
         />
 
@@ -45,7 +78,7 @@ export default function RecipesList({ navigation }) {
           style={styles.input}
           placeholder={"Password"}
           secureTextEntry={true}
-          onChangeText={(event) => setPassword(event)}
+          onChangeText={setPassword}
           value={password}
         />
 
@@ -84,7 +117,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop:50,
+    marginTop: 50,
   },
   logo: {
     width: 300,
@@ -132,7 +165,7 @@ const styles = StyleSheet.create({
   smallText: {
     color: "white",
   },
-  bg:{
-    backgroundColor:"purple",
+  bg: {
+    backgroundColor: "purple",
   }
 });

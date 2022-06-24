@@ -18,15 +18,20 @@ export default function Register({navigation}) {
   }
 
   const create = () => {
-    Users.create({ name: name, email: email,  password: password })
-      .then(id => alert("Usuário " + id + " cadastrado com sucesso!"))
-      .catch(err => console.log(err));
-
-    Users.all()
-      .then(recipe => console.log(recipe))
-      .catch(err => console.log(err));
-
-    handleSuccess();
+    if(name != "" && email != "" && password != ""){
+        Users.create({ name: name, email: email,  password: password })
+        .then(id => alert("Usuário " + id + " cadastrado com sucesso!"))
+        .catch(err => console.log(err));
+  
+      Users.all()
+        .then(recipe => console.log(recipe))
+        .catch(err => console.log(err));
+  
+      handleSuccess();
+    }else{
+        alert("Por favor preencher os campos!");
+    }
+   
   };
 
 

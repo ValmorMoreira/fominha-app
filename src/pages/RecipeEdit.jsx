@@ -12,9 +12,11 @@ import {
 import Recipes from '../services/sqlite/Recipes';
 
 
-export default function RecipeEdit({ navigation }) {
+export default function RecipeEdit({ route, navigation  }) {
 
 
+  const { recipeData } = route.params;
+  console.log("Aqui no Edit este cara  chegou :" + recipeData.name);  
 
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
@@ -22,12 +24,19 @@ export default function RecipeEdit({ navigation }) {
   const [preparemode, setPrepareMode] = useState('');
   const [image, setImage] = useState('');
 
+  const updatedRecipe = {
+    name: name,
+    category: category,
+    ingredients:ingredients,
+    preparemode: preparemode
+  }
+
   const handleSuccess = () => {
     navigation.navigate("Minhas receitas");
   };
 
-  const edit = () => {
-    Recipes.edit({ name: name, category: category, ingredients: ingredients, preparemode: preparemode })
+  const updateRecipe = (id, obj) => {
+    Recipes.update({ name: name, category: category, ingredients: ingredients, preparemode: preparemode })
       .then(id => console.log('Receita: ' + name + ' Atualizada com sucesso!'))
       .catch(err => console.log(err));
 
@@ -49,25 +58,25 @@ export default function RecipeEdit({ navigation }) {
 
       <Text style={styles.text}>Atualize os dados da receita</Text>
       <TextInput
-        style={styles.input} placeholder={name} onChangeText={setName} value={name}
+        style={styles.input}  onChangeText={setName} value={recipeData.name}
       />
 
       <TextInput
-        style={styles.input} placeholder={category} onChangeText={setCategory} value={category}
+        style={styles.input}  onChangeText={setCategory} value={recipeData.category}
       />
 
       <TextInput
-        style={styles.input} placeholder={ingredients} onChangeText={setIngredients} value={ingredients}
+        style={styles.input} onChangeText={setIngredients} value={recipeData.ingredients}
       />
 
       <TextInput
-        style={styles.input} placeholder={preparemode} onChangeText={setPrepareMode} value={preparemode}
+        style={styles.input} onChangeText={setPrepareMode} value={recipeData.preparemode}
       />
 
       <View style={styles.btn}>
         <View >
           <Button title={"Alterar imagem"} onPress={() =>
-            console.log("Nome da receita " + name + "  Categoria: " + category)}
+            console.log("Função para desenvolver..")}
           />
         </View>
         <View>
@@ -75,7 +84,7 @@ export default function RecipeEdit({ navigation }) {
         </View>
         <View>
           <Button title={"Atualizar"} onPress={() =>
-            edit()}
+            updateRecipe(recipeData.id, updatedRecipe)}
           />
         </View>
       </View>

@@ -98,17 +98,17 @@ const create = (obj) => {
    *  - Pode retornar erro (reject) caso o email e senha não sejam válidos ou então caso ocorra erro no SQL;
    *  - Pode retornar um array vazio caso nenhum objeto seja encontrado.
    */
-   const findLogin = (email,password) => {
+   const findLogin = (email) => {
     return new Promise((resolve, reject) => {
       user.transaction((tx) => {
         //comando SQL modificável
         tx.executeSql(
-          "SELECT * FROM users WHERE email = ? AND password = ? ;",
-          [email, password],
+          "SELECT * FROM users WHERE email = ?;",
+          [email],
           //-----------------------
           (_, { rows }) => {
-            if (rows.length > 0) resolve(rows._array);
-            else reject("Obj not found: password"); // nenhum registro encontrado
+            if (rows.length > 0) resolve(rows._array[0]);
+            else reject("Obj not found: email "); // nenhum registro encontrado
           },
           (_, error) => reject(error) // erro interno em tx.executeSql
         );
