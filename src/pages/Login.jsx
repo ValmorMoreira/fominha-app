@@ -12,51 +12,58 @@ import {
 
 import Users from "../services/sqlite/Users";
 
-
 export default function RecipesList({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEnabled, setIsEnabled] = useState(true);
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
 
-
-  useEffect(() => {
-    let query = Users.findLogin(email);
-    query
-      .then((result) => {
-        setUser(result);
-      })
-      .catch((error) => {
-        alert("Ocorreu um erro ao buscar o usuário " + "Debug mode: " + error);
-      });
-  });
-
+  // useEffect(() => {
+  //   let query = Users.findLogin(email);
+  //   query
+  //     .then((result) => {
+  //       setUser(result);
+  //     })
+  //     .catch((error) => {
+  //       alert("Ocorreu um erro ao buscar o usuário " + "Debug mode: " + error);
+  //     });
+  // });
 
   const handleRegister = () => {
     navigation.navigate("Cadastro");
   };
 
   const handleLoginValidate = () => {
+    // console.log("Usuário \n" + user.name);
 
-    console.log("Usuário \n" + user.name);
+    // console.log("Login de --> " + user.email + " " + user.password);
 
-    console.log("Login de --> " + user.email + " " + user.password);
-
-    if (email != "" && password != "") {
-      if (email != "" && password != "") {
-        if (email === user.email && password === user.password) {
+    Users.findLogin(email)
+      .then((result) => {
+        if (email === result.email && password === result.password) {
           alert("Deu boa!!!");
-          navigation.navigate("Home", { user });
-        }
-        else {
+          navigation.navigate("Home", { user: result });
+        } else {
           alert("Usuário ou Senha inválidos!");
         }
-      }
-    } else {
-      alert("Por favor preencher os campos");
-    }
-
-
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Ocorreu um erro ao buscar o usuário " + "Debug mode: " + error);
+      });
+    // if (email != "" && password != "") {
+    //   if (email != "" && password != "") {
+    //     if (email === user.email && password === user.password) {
+    //       alert("Deu boa!!!");
+    //       navigation.navigate("Home", { user });
+    //     }
+    //     else {
+    //       alert("Usuário ou Senha inválidos!");
+    //     }
+    //   }
+    // } else {
+    //   alert("Por favor preencher os campos");
+    // }
   };
 
   return (
@@ -167,5 +174,5 @@ const styles = StyleSheet.create({
   },
   bg: {
     backgroundColor: "purple",
-  }
+  },
 });

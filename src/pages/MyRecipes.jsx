@@ -16,15 +16,12 @@ import SearchBox from "../components/SearchBox";
 import Recipes from "../services/sqlite/Recipes";
 
 export default function MyRecipes({ navigation }) {
-
-
- const appModal = useContext(ModalContext);
+  const appModal = useContext(ModalContext);
 
   const [recipesList, setRecipesList] = useState([]);
-  const [recipeData, setRecipeData] = useState([]);
+  // const [recipeData, setRecipeData] = useState([]);
 
-   // com Promises
-  useEffect(() => {
+  const refreshRecipesList = () => {
     let query = Recipes.all();
     query
       .then((result) => {
@@ -33,6 +30,11 @@ export default function MyRecipes({ navigation }) {
       .catch((error) => {
         alert("Ocorreu um erro ao buscar os items " + "Debug mode: " + error);
       });
+  };
+
+  // com Promises
+  useEffect(() => {
+    refreshRecipesList();
   }, []);
 
   const handleSuccessDelete = () => {
@@ -40,13 +42,13 @@ export default function MyRecipes({ navigation }) {
     navigation.navigate("Minhas receitas");
   };
 
-  //Aqui estou perdido no código 
+  //Aqui estou perdido no código
   const handleRecipeEdit = (obj) => {
-    console.log("No modal este cara é: " + {obj} );
-    setRecipeData({obj});
-    console.log("Aqui depois de useState ficou ... " + recipeData.name);
+    // console.log("No modal este cara é: " + {obj} );
+    // setRecipeData({obj});
+    // console.log("Aqui depois de useState ficou ... " + recipeData.name);
     appModal.hide();
-    navigation.navigate("Editar Receita", {recipeData});
+    navigation.navigate("Editar Receita", { recipeData: obj });
   };
 
   const onSearch = (searchString) => {
@@ -63,14 +65,16 @@ export default function MyRecipes({ navigation }) {
 
   const onDelete = (id) => {
     Recipes.remove(id)
-      .then(id => alert("Receita " + id + " deletada com sucesso!"))
+      .then((id) => {
+        alert("Receita " + id + " deletada com sucesso!");
+        refreshRecipesList();
+      })
       .catch((error) => {
         console.log(error);
         alert(`Nenhum registro encontrado para ${id}!`);
       });
-      handleSuccessDelete();
+    handleSuccessDelete();
   };
-
 
   const Recipe = ({ item }) => {
     return (
@@ -93,44 +97,42 @@ export default function MyRecipes({ navigation }) {
   };
 
   const handleModal = (item) => {
-
     appModal.show(
       <View style={styles.modal}>
         <Text style={styles.recipeTitle}>{item.name}</Text>
         <View style={styles.imageLimit}>
-        <Image
-          style={styles.image}
-          source={require("../../assets/images/default.jpg")}
-        />
-        </View>        
+          <Image
+            style={styles.image}
+            source={require("../../assets/images/default.jpg")}
+          />
+        </View>
         <View>
           <Text style={styles.recipeIngredientsAndPrepare}>Ingredientes</Text>
-          <Text>
-            {item.ingredients}
-          </Text>
+          <Text>{item.ingredients}</Text>
           <Text style={styles.recipeIngredientsAndPrepare}>
             Modo de Preparo
           </Text>
-          <Text>
-            {item.preparemode}
-          </Text>
+          <Text>{item.preparemode}</Text>
         </View>
         <View style={styles.btnContainer}>
           <View style={styles.buttons}>
-            <Button  title="Editar" onPress={() =>
-              handleRecipeEdit(item)} 
+            <Button title="Editar" onPress={() => handleRecipeEdit(item)} />
+          </View>
+          <View style={styles.buttons}>
+            <Button
+              color={"red"}
+              title="Deletar"
+              onPress={() => onDelete(item.id)}
             />
           </View>
           <View style={styles.buttons}>
-            <Button color={"red"} title="Deletar" onPress={() => 
-              onDelete(item.id)} />
+            <Button
+              color={"green"}
+              title="Voltar"
+              onPress={() => appModal.hide()}
+            />
           </View>
-          <View style={styles.buttons}>
-            <Button color={"green"} title="Voltar" onPress={() => appModal.hide()} />
-          </View>
-
         </View>
-
       </View>
     );
   };
@@ -191,8 +193,8 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     margin: 8,
   },
-  imageLimit:{
-    height:"60%",
+  imageLimit: {
+    height: "60%",
   },
   bg: {
     backgroundColor: "purple",
@@ -202,11 +204,11 @@ const styles = StyleSheet.create({
     color: "purple",
   },
   btnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     margin: 25,
   },
   buttons: {
     width: "30%",
-  }
+  },
 });
