@@ -40,6 +40,10 @@ i18n.translations = {
     updatePhoto: "Change photo",
     updateRecipeDetails: "Update recipe details",
     clickDetails: "Click here for more details",
+    userExit: "Disconnected user...",
+    noRecipesFound: "There are no recipes registered.",
+    password: "Password",
+    fields: "Please fill in the fields!"
 
   },
   "pt-BR": {
@@ -79,8 +83,10 @@ i18n.translations = {
     updatePhoto: "Atualizar foto",
     updateRecipeDetails: "Atualize os dados da receita",
     clickDetails: "Clique aqui para mais detalhes",
-
-
+    userExit: "Usuário desconectado...",
+    noRecipesFound: "Não existem receitas cadastradas.",
+    password: "Senha",
+    fields: "Por favor preencher os campos!"
   },
 };
 // Set the locale once at the beginning of your app.

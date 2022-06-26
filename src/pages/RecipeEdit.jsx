@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import i18n from "../services/lang";
 import {
   StyleSheet,
   Text,
@@ -14,37 +15,29 @@ import Recipes from '../services/sqlite/Recipes';
 
 export default function RecipeEdit({ route, navigation  }) {
 
-
   const { recipeData } = route.params;
-  console.log("Aqui no Edit este cara  chegou :" + recipeData.name);  
-
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [preparemode, setPrepareMode] = useState('');
+  
+  const [name, setName] = useState(recipeData.name);
+  const [category, setCategory] = useState(recipeData.category);
+  const [ingredients, setIngredients] = useState(recipeData.ingredients);
+  const [preparemode, setPrepareMode] = useState(recipeData.preparemode);
   const [image, setImage] = useState('');
-
-  const updatedRecipe = {
-    name: name,
-    category: category,
-    ingredients:ingredients,
-    preparemode: preparemode
-  }
 
   const handleSuccess = () => {
     navigation.navigate("Minhas receitas");
   };
 
-  const updateRecipe = (id, obj) => {
-    Recipes.update({ name: name, category: category, ingredients: ingredients, preparemode: preparemode })
-      .then(id => console.log('Receita: ' + name + ' Atualizada com sucesso!'))
+  const updateRecipe = (id) => {
+
+    Recipes.update(id, {name: name, category: category, ingredients: ingredients, preparemode: preparemode})
+      .then(id => alert(`${i18n.t("editedRecipe")}`))
       .catch(err => console.log(err));
 
     Recipes.all()
       .then(recipe => console.log(recipe))
       .catch(err => console.log(err));
 
-    handleSuccess();
+     handleSuccess();
   };
 
 
@@ -56,35 +49,32 @@ export default function RecipeEdit({ route, navigation  }) {
         source={require('../../assets/images/logo-fominha.png')}
       />
 
-      <Text style={styles.text}>Atualize os dados da receita</Text>
+      <Text style={styles.text}>{i18n.t("updateRecipeDetails")}</Text>
       <TextInput
-        style={styles.input}  onChangeText={setName} value={recipeData.name}
+        style={styles.input}  onChangeText={setName} defaultValue={name} 
       />
 
       <TextInput
-        style={styles.input}  onChangeText={setCategory} value={recipeData.category}
+        style={styles.input}  onChangeText={setCategory} defaultValue={category} 
       />
 
       <TextInput
-        style={styles.input} onChangeText={setIngredients} value={recipeData.ingredients}
+        style={styles.input} onChangeText={setIngredients} defaultValue={ingredients}
       />
 
       <TextInput
-        style={styles.input} onChangeText={setPrepareMode} value={recipeData.preparemode}
+        style={styles.input} onChangeText={setPrepareMode} defaultValue={preparemode}
       />
 
-      <View style={styles.btn}>
+      <View style={styles.btnContainer}>
         <View >
-          <Button title={"Alterar imagem"} onPress={() =>
+          <Button title={i18n.t("updatePhoto")} onPress={() =>
             console.log("Função para desenvolver..")}
           />
         </View>
         <View>
-          <Text>    </Text>
-        </View>
-        <View>
-          <Button title={"Atualizar"} onPress={() =>
-            updateRecipe(recipeData.id, updatedRecipe)}
+          <Button color={"green"} title={i18n.t("btnUpdateRecipe")} onPress={() =>
+            updateRecipe(recipeData.id)}
           />
         </View>
       </View>
@@ -129,8 +119,10 @@ const styles = StyleSheet.create({
     alignContent: "space-around",
     alignItems: "center",
   },
-  btn: {
+  btnContainer: {
     flexDirection: "row",
-    marginLeft: 50,
+    justifyContent: "space-around",
+    margin: 25,
   }
 });
+

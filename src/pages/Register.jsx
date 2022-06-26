@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, Image, TextInput, Button, Pressable} from "react-native";
 import React, { useState } from 'react';
+import i18n from "../services/lang";
 
 import Users from '../services/sqlite/Users';
 
@@ -20,7 +21,7 @@ export default function Register({navigation}) {
   const create = () => {
     if(name != "" && email != "" && password != ""){
         Users.create({ name: name, email: email,  password: password })
-        .then(id => alert("Usuário " + id + " cadastrado com sucesso!"))
+        .then(id => alert(`${i18n.t("userRegisterSuccess")}`))
         .catch(err => console.log(err));
   
       Users.all()
@@ -29,7 +30,7 @@ export default function Register({navigation}) {
   
       handleSuccess();
     }else{
-        alert("Por favor preencher os campos!");
+        alert(`${i18n.t("fields")}`);
     }
    
   };
@@ -42,25 +43,25 @@ export default function Register({navigation}) {
             style={styles.logo}
             source={require('../../assets/images/logo-fominha.png')}
         />
-        <Text style={styles.text}>Cadastro de Usuário</Text>
+        <Text style={styles.text}>{i18n.t("userRegister")}</Text>
         <TextInput
-            style={styles.input} placeholder={'Nome de usuário'} onChangeText={event => setName(event)} onChange={setName} value={name}
+            style={styles.input} placeholder={i18n.t("userName")} onChangeText={event => setName(event)} onChange={setName} value={name}
         />
         <TextInput
             style={styles.input}  placeholder={'E-mail'} onChangeText={event => setEmail(event)} onChange={setEmail} value={email}
         />
 
         <TextInput
-            style={styles.input} placeholder={'Password'} secureTextEntry={true} onChangeText={e => setPassword(e)} value={password}
+            style={styles.input} placeholder={i18n.t("password")} secureTextEntry={true} onChangeText={e => setPassword(e)} value={password}
         />
 
         <Pressable style={styles.btn} onPress={handleRegister}  >
-            <Text style={styles.textWhite}>Cadastrar</Text>
+            <Text style={styles.textWhite}>{i18n.t("btnRegister")}</Text>
         </Pressable>
 
         <View>
             <Pressable onPress={handleSuccess}>
-                <Text style={styles.smallText}>Possui uma conta? Faça o seu login aqui...</Text>
+                <Text style={styles.smallText}>{i18n.t("withAccount")}</Text>
             </Pressable>
         </View>
 

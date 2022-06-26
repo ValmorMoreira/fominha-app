@@ -59,6 +59,15 @@ export default function RecipesList() {
     );
   };
 
+  if(flData == 0){
+    return (
+      <View style={styles.bg}>
+        <Text style={styles.title}>Dicas de Burgers </Text>
+        <SearchBox onSearch={onSearch} />
+        <Text style={styles.title}>Carregando...</Text>
+      </View>
+    )
+  }
   return (
     <View style={styles.bg}>
       <Text style={styles.title}>Dicas de Burgers </Text>

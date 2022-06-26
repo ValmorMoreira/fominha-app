@@ -23,6 +23,7 @@ export default function Home({ navigation, route }) {
 
   const handleLogout = () => {
     navigation.navigate("Login");
+    alert(`${i18n.t("userExit")}`);
   };
 
   return (
@@ -36,19 +37,19 @@ export default function Home({ navigation, route }) {
         </>
         <>
           <Pressable style={styles.btn} onPress={handleRecipeRegister}>
-            <Text style={styles.textWhite}>Cadastrar receita</Text>
+            <Text style={styles.textWhite}>{i18n.t("btnRecipeRegister")}</Text>
           </Pressable>
           <Pressable style={styles.btn} onPress={handleRecipesList}>
-            <Text style={styles.textWhite}>Dicas de Burgers</Text>
+            <Text style={styles.textWhite}>{i18n.t("btnBurgersTips")}</Text>
           </Pressable>
           <Pressable style={styles.btn} onPress={handleMyRecipes}>
-            <Text style={styles.textWhite}>Minhas receitas</Text>
+            <Text style={styles.textWhite}>{i18n.t("btnMyRecipes")}</Text>
           </Pressable>
           <Pressable style={styles.btn} onPress={handleAbout}>
-            <Text style={styles.textWhite}>Sobre o App</Text>
+            <Text style={styles.textWhite}>{i18n.t("aboutApp")}</Text>
           </Pressable>
           <Pressable style={styles.btn} onPress={handleLogout}>
-            <Text style={styles.textWhite}>Sair</Text>
+            <Text style={styles.textWhite}>{i18n.t("exit")}</Text>
           </Pressable>
         </>
       </View>

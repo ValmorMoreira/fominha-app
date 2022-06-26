@@ -17,6 +17,16 @@ export default function RecipeRegister({ navigation }) {
     navigation.navigate("Minhas receitas");
   };
 
+  const handleValidRecipe = () => {
+    if(name != "" && category != "" && ingredients != "" && preparemode != "")
+    {
+      create();
+    }
+    else{
+      alert("Por favor preencher todos os campos...");
+    }
+  };
+
   const create = () => {
     Recipes.create({ name: name, category: category, ingredients: ingredients, preparemode: preparemode })
       .then(id => alert("Receita " + id + " cadastrada com sucesso!"))
@@ -59,11 +69,8 @@ export default function RecipeRegister({ navigation }) {
             <ImagePickerCustom />
           </View>
           <View>
-            <Text>    </Text>
-          </View>
-          <View>
             <Button title={"Cadastrar"} color={"green"} onPress={() =>
-              create()}
+              handleValidRecipe()}
             />
           </View>
 
@@ -112,6 +119,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     flexDirection: "row",
-    marginLeft:50,
+    justifyContent:"space-evenly",
+    margin: 10,
   }
 });

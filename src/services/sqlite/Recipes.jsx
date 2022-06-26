@@ -57,7 +57,6 @@ const update = (id, obj) => {
           obj.category,
           obj.ingredients,
           obj.preparemode,
-          obj.image,
           id,
         ],
         //-----------------------

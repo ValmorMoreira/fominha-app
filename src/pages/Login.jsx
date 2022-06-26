@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import i18n from "../services/lang";
 import {
   StyleSheet,
   Text,
@@ -16,54 +17,43 @@ export default function RecipesList({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEnabled, setIsEnabled] = useState(true);
-  // const [user, setUser] = useState([]);
 
-  // useEffect(() => {
-  //   let query = Users.findLogin(email);
-  //   query
-  //     .then((result) => {
-  //       setUser(result);
-  //     })
-  //     .catch((error) => {
-  //       alert("Ocorreu um erro ao buscar o usuário " + "Debug mode: " + error);
-  //     });
-  // });
+  useEffect(() => {
+    const reset = navigation.addListener('focus', () => {
+      resetForm();
+    });
+    return reset;
+  }, []);
+
+  const resetForm = () => {
+      setEmail('');
+      setPassword('');
+  }
+
 
   const handleRegister = () => {
     navigation.navigate("Cadastro");
   };
 
   const handleLoginValidate = () => {
-    // console.log("Usuário \n" + user.name);
+    if (email == "" || password == "") {
+      alert(`${i18n.t("fields")}`);
+    }
+    else {
+      Users.findLogin(email)
+        .then((result) => {
+          if (email === result.email && password === result.password) {
+            navigation.navigate("Home", { user: result });
+          } else {
+            alert("Usuário ou Senha inválidos!");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("Ocorreu um erro ao buscar o usuário " + "Debug mode: " + error);
+        });
+    }
 
-    // console.log("Login de --> " + user.email + " " + user.password);
-
-    Users.findLogin(email)
-      .then((result) => {
-        if (email === result.email && password === result.password) {
-          alert("Deu boa!!!");
-          navigation.navigate("Home", { user: result });
-        } else {
-          alert("Usuário ou Senha inválidos!");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Ocorreu um erro ao buscar o usuário " + "Debug mode: " + error);
-      });
-    // if (email != "" && password != "") {
-    //   if (email != "" && password != "") {
-    //     if (email === user.email && password === user.password) {
-    //       alert("Deu boa!!!");
-    //       navigation.navigate("Home", { user });
-    //     }
-    //     else {
-    //       alert("Usuário ou Senha inválidos!");
-    //     }
-    //   }
-    // } else {
-    //   alert("Por favor preencher os campos");
-    // }
   };
 
   return (
@@ -73,7 +63,7 @@ export default function RecipesList({ navigation }) {
           style={styles.logo}
           source={require("../../assets/images/logo-fominha.png")}
         />
-        <Text style={styles.text}>Faça seu Login</Text>
+        <Text style={styles.text}>{i18n.t("doYourLogin")}</Text>
         <TextInput
           style={styles.input}
           placeholder={"E-mail"}
@@ -83,14 +73,14 @@ export default function RecipesList({ navigation }) {
 
         <TextInput
           style={styles.input}
-          placeholder={"Password"}
+          placeholder={i18n.t("password")}
           secureTextEntry={true}
           onChangeText={setPassword}
           value={password}
         />
 
         <View style={styles.inline}>
-          <Text style={styles.smallText}>Mantenha-me logado</Text>
+          <Text style={styles.smallText}>{i18n.t("keepLogged")}</Text>
 
           <Switch
             value={isEnabled}
@@ -103,15 +93,15 @@ export default function RecipesList({ navigation }) {
         <Pressable
           style={styles.btn}
           onPress={handleLoginValidate}
-          disabled={!isEnabled}
+        //disabled={!isEnabled}
         >
-          <Text style={styles.textWhite}>Login</Text>
+          <Text style={styles.textWhite}>{i18n.t("btnLogin")}</Text>
         </Pressable>
 
         <View>
           <Pressable onPress={handleRegister}>
             <Text style={styles.smallText}>
-              Não possui uma conta? Clique aqui.
+              {i18n.t("withoutAccount")}
             </Text>
           </Pressable>
         </View>

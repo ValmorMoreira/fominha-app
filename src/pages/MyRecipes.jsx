@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import i18n from "../services/lang";
 import {
   View,
   Text,
@@ -19,13 +20,13 @@ export default function MyRecipes({ navigation }) {
   const appModal = useContext(ModalContext);
 
   const [recipesList, setRecipesList] = useState([]);
-  // const [recipeData, setRecipeData] = useState([]);
 
   const refreshRecipesList = () => {
     let query = Recipes.all();
     query
       .then((result) => {
         setRecipesList(result);
+        console.log("oi");
       })
       .catch((error) => {
         alert("Ocorreu um erro ao buscar os items " + "Debug mode: " + error);
@@ -34,7 +35,11 @@ export default function MyRecipes({ navigation }) {
 
   // com Promises
   useEffect(() => {
-    refreshRecipesList();
+    //refreshRecipesList();
+    const refresh = navigation.addListener('focus', () => {
+      refreshRecipesList();
+    });
+    return refresh;
   }, []);
 
   const handleSuccessDelete = () => {
@@ -42,11 +47,7 @@ export default function MyRecipes({ navigation }) {
     navigation.navigate("Minhas receitas");
   };
 
-  //Aqui estou perdido no código
   const handleRecipeEdit = (obj) => {
-    // console.log("No modal este cara é: " + {obj} );
-    // setRecipeData({obj});
-    // console.log("Aqui depois de useState ficou ... " + recipeData.name);
     appModal.hide();
     navigation.navigate("Editar Receita", { recipeData: obj });
   };
@@ -66,12 +67,12 @@ export default function MyRecipes({ navigation }) {
   const onDelete = (id) => {
     Recipes.remove(id)
       .then((id) => {
-        alert("Receita " + id + " deletada com sucesso!");
+        alert("Receita nº: " + id + " deletada com sucesso!");
         refreshRecipesList();
       })
       .catch((error) => {
         console.log(error);
-        alert(`Nenhum registro encontrado para ${id}!`);
+        alert(`Nenhum registro encontrado para receita nº:${id}!`);
       });
     handleSuccessDelete();
   };
@@ -83,14 +84,14 @@ export default function MyRecipes({ navigation }) {
           <Text style={styles.recipeTitle}> {item.name}</Text>
           <View>
             <Text style={styles.recipeCategory}>
-              Categoria - {item.category}
+              {i18n.t("category")} - {item.category}
             </Text>
           </View>
           <Image
             style={styles.image}
             source={require("../../assets/images/default.jpg")}
           />
-          <Text style={styles.smallText}> Clique para ver mais detalhes</Text>
+          <Text style={styles.smallText}> {i18n.t("clickDetails")}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -107,28 +108,28 @@ export default function MyRecipes({ navigation }) {
           />
         </View>
         <View>
-          <Text style={styles.recipeIngredientsAndPrepare}>Ingredientes</Text>
+          <Text style={styles.recipeIngredientsAndPrepare}>{i18n.t("ingredients")}</Text>
           <Text>{item.ingredients}</Text>
           <Text style={styles.recipeIngredientsAndPrepare}>
-            Modo de Preparo
+          {i18n.t("prepareMode")}
           </Text>
           <Text>{item.preparemode}</Text>
         </View>
         <View style={styles.btnContainer}>
           <View style={styles.buttons}>
-            <Button title="Editar" onPress={() => handleRecipeEdit(item)} />
+            <Button title={i18n.t("edit")} onPress={() => handleRecipeEdit(item)} />
           </View>
           <View style={styles.buttons}>
             <Button
               color={"red"}
-              title="Deletar"
+              title={i18n.t("delete")}
               onPress={() => onDelete(item.id)}
             />
           </View>
           <View style={styles.buttons}>
             <Button
               color={"green"}
-              title="Voltar"
+              title={i18n.t("back")}
               onPress={() => appModal.hide()}
             />
           </View>
@@ -137,18 +138,25 @@ export default function MyRecipes({ navigation }) {
     );
   };
 
-  return (
-    <View style={styles.bg}>
-      <Text style={styles.title}></Text>
-      <SearchBox onSearch={onSearch} />
-      <FlatList
-        data={recipesList}
-        renderItem={Recipe}
-        keyExtractor={(_item, index) => index}
-      />
-    </View>
-  );
-}
+  if(recipesList == 0){
+      return (
+        <View style={styles.bg}>      
+          <Text style={styles.nothing}> {i18n.t("noRecipesFound")} </Text>
+        </View>
+      )
+  }
+    return (
+      <View style={styles.bg}>
+        <Text style={styles.title}></Text>
+        <SearchBox onSearch={onSearch} />
+        <FlatList
+          data={recipesList}
+          renderItem={Recipe}
+          keyExtractor={(_item, index) => index}
+        />
+      </View>
+    );
+  }
 
 const styles = StyleSheet.create({
   title: {
@@ -211,4 +219,11 @@ const styles = StyleSheet.create({
   buttons: {
     width: "30%",
   },
+  nothing:{
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "white",
+    marginTop:"70%",
+  }
 });
