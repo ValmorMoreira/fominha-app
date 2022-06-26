@@ -75,9 +75,9 @@
 
 #### Alertas de erros - 08/06/2022 ✅
 
-#### Imagens das receitas -  (Em progresso...)
+#### Imagens das receitas -  (No momento usando a default) ✅
 
-### Projeto final - (Em andamento)
+### Projeto final - (Entrega planejada para 27/06/2022) ✅
 
 ## Backlog 
 
@@ -111,11 +111,8 @@
 
 ## Observções
 
-#### Ainda falta atualizar os prints das telas com o visual novo aqui no ReadMe.md
+#### Tradução em andamento em todas as telas e por fim a implementação do ImagePicker se possível.
 
-#### Também falta ainda a validação do login e de formulários.
-
-#### Buscando solução atualmente para enviar os proops do modal da receita selecionada, para a tela de editar receita e posteriormente chamar o método UPDATE do SQLITE.
 
 
 
