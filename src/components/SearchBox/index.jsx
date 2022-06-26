@@ -1,5 +1,5 @@
-import { Button, Pressable, StyleSheet, TextInput, View } from "react-native";
-import { Feather, Entypo } from "@expo/vector-icons";
+import {  Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
 
 export default function SearchBox({ onSearch }) {

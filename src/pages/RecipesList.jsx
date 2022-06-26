@@ -14,13 +14,18 @@ import api from "../services/api";
 export default function RecipesList() {
 
   const [flData, setFlData] = useState([]);
+  const [masterData, setMasterData] = useState([]);
 
   useEffect(() => {
-    axios.request(api).then((response) => {
-      setFlData(response.data);
-    });
+    getApi();
   }, []);
 
+  const getApi = () =>{
+    axios.request(api).then((response) => {
+      setFlData(response.data);
+      setMasterData(response.data);
+    });
+  }
 
    const handleClickRecipe = (item) => {
     console.log("Clicked on item " + item.name);
@@ -29,12 +34,9 @@ export default function RecipesList() {
 
   const onSearch = (searchString) => {
     console.log("Search for: ", searchString);
-
-    const filteredData = flData.filter((item) => {
+    const filteredData = masterData.filter((item) => {
       const lowName = item.name.toLowerCase();
-      if(filteredData == []){
-        return  alert('eita');
-      }
+
       return lowName.includes(searchString.toLowerCase());
     });
 
@@ -59,7 +61,7 @@ export default function RecipesList() {
     );
   };
 
-  if(flData == 0){
+  if(masterData == 0){
     return (
       <View style={styles.bg}>
         <Text style={styles.title}>Dicas de Burgers </Text>
@@ -68,6 +70,17 @@ export default function RecipesList() {
       </View>
     )
   }
+
+  if(flData == 0){
+    return (
+      <View style={styles.bg}>
+        <Text style={styles.title}>Dicas de Burgers </Text>
+        <SearchBox onSearch={onSearch} />
+        <Text style={styles.title}>Sem resultados para pesquisa...</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.bg}>
       <Text style={styles.title}>Dicas de Burgers </Text>
