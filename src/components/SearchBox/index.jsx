@@ -1,6 +1,7 @@
 import {  Pressable, StyleSheet, TextInput, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
+import i18n from "../../services/lang";
 
 export default function SearchBox({ onSearch }) {
   const [searchString, setSearchString] = useState("");
@@ -14,7 +15,7 @@ export default function SearchBox({ onSearch }) {
       <View style={styles.container}>
         <TextInput
           style={styles.input}
-          placeholder={"Buscar por nome"}
+          placeholder={`${i18n.t("search")}`}
           value={searchString}
           onChangeText={setSearchString}
         />

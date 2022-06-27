@@ -81,11 +81,11 @@ export default function RecipeEdit({ route, navigation  }) {
       />
 
       <TextInput
-        style={styles.input} onChangeText={setIngredients} defaultValue={ingredients}
+        style={styles.input} multiline={true} numberOfLines={3}  onChangeText={setIngredients} defaultValue={ingredients}
       />
 
       <TextInput
-        style={styles.input} onChangeText={setPrepareMode} defaultValue={preparemode}
+        style={styles.input} multiline={true} numberOfLines={3}  onChangeText={setPrepareMode} defaultValue={preparemode}
       />
 
       <View  style={styles.image}>

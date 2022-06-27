@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import SearchBox from "../components/SearchBox";
 import axios from "axios";
+import i18n from '../services/lang';
 
 import api from "../services/api";
 
@@ -51,11 +52,11 @@ export default function RecipesList() {
       >
         <Text style={styles.burgerTitle}>{item.name}</Text>
         <View style={styles.burgerContent}>
-          <Text>Ingredientes: </Text>
+          <Text>{i18n.t("ingredients")}: </Text>
           <Text> {item.ingredients} </Text>
         </View>
         <View >
-          <Text style={styles.burgerFooter}>Restaurante: {item.restaurant}</Text>
+          <Text style={styles.burgerFooter}>{i18n.t("restaurant")}: {item.restaurant}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -64,9 +65,9 @@ export default function RecipesList() {
   if(masterData == 0){
     return (
       <View style={styles.bg}>
-        <Text style={styles.title}>Dicas de Burgers </Text>
+        <Text style={styles.title}>{i18n.t("btnBurgersTips")}</Text>
         <SearchBox onSearch={onSearch} />
-        <Text style={styles.title}>Carregando...</Text>
+        <Text style={styles.title}>{i18n.t("loading")}</Text>
       </View>
     )
   }
@@ -74,16 +75,16 @@ export default function RecipesList() {
   if(flData == 0){
     return (
       <View style={styles.bg}>
-        <Text style={styles.title}>Dicas de Burgers </Text>
+        <Text style={styles.title}>{i18n.t("btnBurgersTips")}</Text>
         <SearchBox onSearch={onSearch} />
-        <Text style={styles.title}>Sem resultados para pesquisa...</Text>
+        <Text style={styles.title}>{i18n.t("searchErrorApi")}</Text>
       </View>
     )
   }
 
   return (
     <View style={styles.bg}>
-      <Text style={styles.title}>Dicas de Burgers </Text>
+      <Text style={styles.title}>{i18n.t("btnBurgersTips")}</Text>
       <SearchBox onSearch={onSearch} />
       <FlatList
         data={flData}

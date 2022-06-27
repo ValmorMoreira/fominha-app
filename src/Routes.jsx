@@ -17,7 +17,7 @@ export default function Routes() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Cadastro" component={Register} />        
+        <Stack.Screen name={"Cadastro"} component={Register} />        
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Cadastro de receita" component={RecipeRegister} />
         <Stack.Screen name="Dicas de Burgers" component={RecipesList} />

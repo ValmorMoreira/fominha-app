@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Image, Text, View, TextInput, Button, ScrollView } from 'react-native';
-
-import Recipes from '../services/sqlite/Recipes';
-
-import ImageStorage from '../services/ImageStorage';
 import i18n from '../services/lang';
+import Recipes from '../services/sqlite/Recipes';
+import ImageStorage from '../services/ImageStorage';
 
 export default function RecipeRegister({ navigation }) {
 
@@ -35,7 +33,7 @@ export default function RecipeRegister({ navigation }) {
       handleDelete();
     }
     else {
-      alert("Por favor preencher todos os campos...");
+      alert(`${i18n.t("fields")}`);
     }
   };
 
@@ -68,21 +66,21 @@ export default function RecipeRegister({ navigation }) {
         source={require('../../assets/images/logo-fominha.png')}
       />
 
-      <Text style={styles.text}>Prencha os dados da receita</Text>
+      <Text style={styles.text}>{i18n.t("fillRecipeData")}</Text>
       <TextInput
-        style={styles.input} placeholder={'Nome da receita'} onChangeText={setName} value={name}
+        style={styles.input} placeholder={`${i18n.t("recipeName")}`} onChangeText={setName} value={name}
       />
 
       <TextInput
-        style={styles.input} placeholder={'Categoria'} onChangeText={setCategory} value={category}
+        style={styles.input} placeholder={`${i18n.t("category")}`} onChangeText={setCategory} value={category}
       />
 
       <TextInput
-        style={styles.input} placeholder={'Ingredientes'} onChangeText={setIngredients} value={ingredients}
+        style={styles.input} multiline={true} numberOfLines={3} placeholder={`${i18n.t("ingredients")}`} onChangeText={setIngredients} value={ingredients}
       />
 
       <TextInput
-        style={styles.input} placeholder={'Modo de preparo'} onChangeText={setPrepareMode} value={preparemode}
+        style={styles.input} multiline={true} numberOfLines={3} placeholder={`${i18n.t("prepareMode")}`} onChangeText={setPrepareMode} value={preparemode}
       />
       
       <View  style={styles.image}>
@@ -102,7 +100,7 @@ export default function RecipeRegister({ navigation }) {
         </View>
 
         <View>
-          <Button title={"Cadastrar"} color={"green"} onPress={() =>
+          <Button title={`${i18n.t("btnRegister")}`} color={"green"} onPress={() =>
             handleValidRecipe()}
           />
         </View>

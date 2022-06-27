@@ -7,6 +7,7 @@ i18n.translations = {
     doYourLogin: "Longin to Start",
     btnLogin: "Login",
     keepLogged: "keep me logged in",
+    errorLogin: "E-mail or Password incorrect",
     withoutAccount:"Don't have an account? Click here.",
     userRegister: "User Register",
     userRegisterSuccess: "User successfully registered!",
@@ -19,7 +20,7 @@ i18n.translations = {
     btnMyRecipes: "My Recipes",
     aboutApp: "About this App",
     exit: "Logoff",
-    fillRecipeData: "Fill in the recipe data", 
+    fillRecipeData: "Fill in the recipe description", 
     recipeName: "Recipe name",
     category: "Category",
     ingredients: "Ingredients",
@@ -37,6 +38,7 @@ i18n.translations = {
     deleteRecipe: "Recipe successfully deleted!",
     editedRecipe: "Recipe successfully updated!",
     searchError: "No results found for: ",
+    searchErrorApi: "No results found...",
     updatePhoto: "Change photo",
     updateRecipeDetails: "Update recipe details",
     clickDetails: "Click here for more details",
@@ -44,13 +46,15 @@ i18n.translations = {
     noRecipesFound: "There are no recipes registered.",
     password: "Password",
     fields: "Please fill in the fields!",
-    version: "Fominha - Version 1.0"
+    version: "Fominha - Version 1.0",
+    loading: "Loading data...",
 
   },
   "pt-BR": {
     doYourLogin: "Faça seu Login",
     btnLogin: "Logar",
     keepLogged: "Mantenha-me logado",
+    errorLogin: "E-mail ou Senha inválido",
     withoutAccount:"Não possui uma conta? Clique aqui.",
     userRegister: "Cadastro de Usuário",
     userRegisterSuccess: "Usuário cadastrado com sucesso!",
@@ -81,6 +85,7 @@ i18n.translations = {
     deleteRecipe: "Receita deletada com sucesso!",
     editedRecipe: "Receita atualizada com sucesso!",
     searchError: "Não foram encontrados resultados para: ",
+    searchErrorApi: "Sem resultados para pesquisa...",
     updatePhoto: "Atualizar foto",
     updateRecipeDetails: "Atualize os dados da receita",
     clickDetails: "Clique aqui para mais detalhes",
@@ -88,7 +93,8 @@ i18n.translations = {
     noRecipesFound: "Não existem receitas cadastradas.",
     password: "Senha",
     fields: "Por favor preencher os campos!",
-    version: "Fominha - Versão 1.0"
+    version: "Fominha - Versão 1.0",
+    loading: "Carregando dados...",
   },
 };
 // Set the locale once at the beginning of your app.

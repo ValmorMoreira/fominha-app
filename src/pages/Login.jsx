@@ -45,7 +45,7 @@ export default function RecipesList({ navigation }) {
           if (email === result.email && password === result.password) {
             navigation.navigate("Home", { user: result });
           } else {
-            alert("Usuário ou Senha inválidos!");
+            alert(`${i18n.t("errorLogin")}`);
           }
         })
         .catch((error) => {
