@@ -90,8 +90,8 @@ export default function RecipeEdit({ route, navigation  }) {
 
       <View  style={styles.image}>
        {<Image     
-          source={ !image ? { uri: image } : require("../../assets/images/default.jpg")}
-        />}
+          source={ image ? { uri: image } : require("../../assets/images/default.jpg")}
+          style={{ width: 250, height: 250, marginLeft:"10%" }} />}
       </View>
        
       <View style={styles.btnContainer}>

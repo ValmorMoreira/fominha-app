@@ -89,8 +89,8 @@ export default function RecipeRegister({ navigation }) {
         
        { <Image     
           //coloquei uma negação para aparecer a opção do else    
-          source={ !image ? { uri: image } : require("../../assets/images/default.jpg")}
-        />}
+          source={ image ? { uri: image } : require("../../assets/images/default.jpg")}
+          style={{ width: 250, height: 250, marginLeft:"10%" }} />}
       </View>
 
       <View style={styles.btn}>
