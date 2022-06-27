@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, Button, Pressable, Image } from "react-native";
 import React, { useContext } from "react";
 import { ModalContext } from "../components/AppModal";
+import i18n from "../services/lang";
 
 export default function About() {
 
@@ -9,7 +10,7 @@ export default function About() {
   const handleModal = () => {
     appModal.show(
       <View style={styles.modal}>
-        <Text>Olha só, um teste de modal! !EasterEgg! HAHAHAHA</Text>
+        <Text>{i18n.t("easterEgg")}</Text>
         <Button title="OK" onPress={() => appModal.hide()} />
       </View>
     );
@@ -21,9 +22,9 @@ export default function About() {
                 style={styles.logo}
                 source={require('../../assets/images/logo-fominha.png')}
             />
-      <Text style={styles.text}> Todos os dieritos reservados</Text>
+      <Text style={styles.text}>{i18n.t("aboutDesc")}</Text>
       <Text style={styles.text}>Valmor Moreira</Text>
-      <Text style={styles.text}>Fominha - Version 1.0</Text>
+      <Text style={styles.text}>{i18n.t("version")}</Text>
       <Pressable style={styles.btn} onPress={handleModal}>
         <Text style={styles.textWhite}>Easter Egg</Text>
       </Pressable>

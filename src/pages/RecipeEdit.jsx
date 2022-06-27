@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import i18n from "../services/lang";
 import {
   StyleSheet,
@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import Recipes from '../services/sqlite/Recipes';
-
+import ImageStorage from '../services/ImageStorage';
 
 export default function RecipeEdit({ route, navigation  }) {
 
@@ -21,7 +21,15 @@ export default function RecipeEdit({ route, navigation  }) {
   const [category, setCategory] = useState(recipeData.category);
   const [ingredients, setIngredients] = useState(recipeData.ingredients);
   const [preparemode, setPrepareMode] = useState(recipeData.preparemode);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(recipeData.image);
+
+  const filename = "image1.base64";
+
+  const initializeAsync = async () => {
+    const loadedImage = await ImageStorage.loadImageAsync(filename);
+    if (loadedImage) setImage(loadedImage);
+    console.log("Image now -> " + image);
+  };
 
   const handleSuccess = () => {
     navigation.navigate("Minhas receitas");
@@ -29,7 +37,7 @@ export default function RecipeEdit({ route, navigation  }) {
 
   const updateRecipe = (id) => {
 
-    Recipes.update(id, {name: name, category: category, ingredients: ingredients, preparemode: preparemode})
+    Recipes.update(id, {name: name, category: category, ingredients: ingredients, preparemode: preparemode, image:image})
       .then(id => alert(`${i18n.t("editedRecipe")}`))
       .catch(err => console.log(err));
 
@@ -37,8 +45,22 @@ export default function RecipeEdit({ route, navigation  }) {
       .then(recipe => console.log(recipe))
       .catch(err => console.log(err));
 
-     handleSuccess();
+     handleSuccess();     
   };
+
+  const handleMediaLibrary = async () => {
+    const storedImage = await ImageStorage.storeImageAsync(filename, false);
+    if (storedImage) setImage(storedImage);
+  };
+
+  const handleDelete = async () => {
+    await ImageStorage.deleteImageAsync(filename);
+    setImage(null);
+  };
+
+  useEffect(() => {
+    initializeAsync();
+  }, []);
 
 
   return (
@@ -66,10 +88,15 @@ export default function RecipeEdit({ route, navigation  }) {
         style={styles.input} onChangeText={setPrepareMode} defaultValue={preparemode}
       />
 
+      <View  style={styles.image}>
+       {<Image     
+          source={ !image ? { uri: image } : require("../../assets/images/default.jpg")}
+        />}
+      </View>
+       
       <View style={styles.btnContainer}>
         <View >
-          <Button title={i18n.t("updatePhoto")} onPress={() =>
-            console.log("Função para desenvolver..")}
+          <Button title={i18n.t("updatePhoto")} onPress={handleMediaLibrary}
           />
         </View>
         <View>
@@ -123,6 +150,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     margin: 25,
+  },
+  image:{
+    flex:1,
+    alignContent:"center",
+    margin: 10,
+    marginLeft:40,
+    resizeMode:"contain",
   }
 });
 

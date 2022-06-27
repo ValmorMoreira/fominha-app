@@ -26,7 +26,6 @@ export default function MyRecipes({ navigation }) {
     query
       .then((result) => {
         setRecipesList(result);
-        console.log("oi");
       })
       .catch((error) => {
         alert("Ocorreu um erro ao buscar os items " + "Debug mode: " + error);
@@ -60,19 +59,19 @@ export default function MyRecipes({ navigation }) {
       })
       .catch((error) => {
         console.log(error);
-        alert(`Nenhum registro encontrado para ${searchString}!`);
+        alert(`${i18n.t("searchError")} ${searchString}`);
       });
   };
 
   const onDelete = (id) => {
     Recipes.remove(id)
       .then((id) => {
-        alert("Receita nº: " + id + " deletada com sucesso!");
+        alert(`${i18n.t("deleteRecipe")}`);
         refreshRecipesList();
       })
       .catch((error) => {
         console.log(error);
-        alert(`Nenhum registro encontrado para receita nº:${id}!`);
+        alert(`${i18n.t("searchError")} ${id}!`);
       });
     handleSuccessDelete();
   };
@@ -87,10 +86,10 @@ export default function MyRecipes({ navigation }) {
               {i18n.t("category")} - {item.category}
             </Text>
           </View>
-          <Image
+         <Image
             style={styles.image}
-            source={require("../../assets/images/default.jpg")}
-          />
+            source={ item.image ? {uri: item.image} : require("../../assets/images/default.jpg")}
+          /> 
           <Text style={styles.smallText}> {i18n.t("clickDetails")}</Text>
         </View>
       </TouchableOpacity>
@@ -102,9 +101,9 @@ export default function MyRecipes({ navigation }) {
       <View style={styles.modal}>
         <Text style={styles.recipeTitle}>{item.name}</Text>
         <View style={styles.imageLimit}>
-          <Image
+        <Image
             style={styles.image}
-            source={require("../../assets/images/default.jpg")}
+            source={ item.image ? {uri: item.image} : require("../../assets/images/default.jpg")}
           />
         </View>
         <View>

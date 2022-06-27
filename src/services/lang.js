@@ -31,7 +31,7 @@ i18n.translations = {
     delete: "Delete",
     back: "Back",
     btnUpdateRecipe: "Update",
-    aboutDesc: "All rights reserved - Valmor Moreira - Fominha - Version 1.0",
+    aboutDesc: "All rights reserved",
     easterEgg: "Look, this is a modal test! Easter Egg Found HAHAHA",
     successRecipe: "Recipe successfully registered!",
     deleteRecipe: "Recipe successfully deleted!",
@@ -43,7 +43,8 @@ i18n.translations = {
     userExit: "Disconnected user...",
     noRecipesFound: "There are no recipes registered.",
     password: "Password",
-    fields: "Please fill in the fields!"
+    fields: "Please fill in the fields!",
+    version: "Fominha - Version 1.0"
 
   },
   "pt-BR": {
@@ -74,7 +75,7 @@ i18n.translations = {
     delete: "Excluir",
     back: "Voltar",
     btnUpdateRecipe: "Atualizar",
-    aboutDesc: "Todos os direitos reservados - Valmor Moreira - Fominha - Versão 1.0",
+    aboutDesc: "Todos os direitos reservados",
     easterEgg: "Olha só, um teste de modal! EasterEgg! HAHAHA",
     successRecipe: "Receita cadastrada com sucesso!",
     deleteRecipe: "Receita deletada com sucesso!",
@@ -86,7 +87,8 @@ i18n.translations = {
     userExit: "Usuário desconectado...",
     noRecipesFound: "Não existem receitas cadastradas.",
     password: "Senha",
-    fields: "Por favor preencher os campos!"
+    fields: "Por favor preencher os campos!",
+    version: "Fominha - Versão 1.0"
   },
 };
 // Set the locale once at the beginning of your app.

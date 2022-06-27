@@ -10,7 +10,7 @@ db.transaction((tx) => {
   //<<<<<<<<<<<<<<<<<<<<<<<< USE ISSO APENAS DURANTE OS TESTES!!! >>>>>>>>>>>>>>>>>>>>>>>
 
   tx.executeSql(
-    "CREATE TABLE IF NOT EXISTS recipes (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(20), category VARCHAR(20), ingredients VARCHAR(50), preparemode VARCHAR(50));"
+    "CREATE TABLE IF NOT EXISTS recipes (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(20), category VARCHAR(20), ingredients VARCHAR(50), preparemode VARCHAR(50), image VARCHAR(100));"
   );
 });
 
@@ -26,8 +26,8 @@ const create = (obj) => {
     db.transaction((tx) => {
       //comando SQL modificável
       tx.executeSql(
-        "INSERT INTO recipes (name, category, ingredients, preparemode) values (?, ?, ?, ?);",
-        [obj.name, obj.category, obj.ingredients, obj.preparemode],
+        "INSERT INTO recipes (name, category, ingredients, preparemode, image) values (?, ?, ?, ?, ?);",
+        [obj.name, obj.category, obj.ingredients, obj.preparemode, obj.image],
         //-----------------------
         (_, { rowsAffected, insertId }) => {
           if (rowsAffected > 0) resolve(insertId);
@@ -51,12 +51,13 @@ const update = (id, obj) => {
     db.transaction((tx) => {
       //comando SQL modificável
       tx.executeSql(
-        "UPDATE recipes SET name=?, category=?, ingredients=?, preparemode=? WHERE id=?;",
+        "UPDATE recipes SET name=?, category=?, ingredients=?, preparemode=?, image=? WHERE id=?;",
         [
           obj.name,
           obj.category,
           obj.ingredients,
           obj.preparemode,
+          obj.image,
           id,
         ],
         //-----------------------
