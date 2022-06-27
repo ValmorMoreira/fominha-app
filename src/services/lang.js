@@ -48,6 +48,14 @@ i18n.translations = {
     fields: "Please fill in the fields!",
     version: "Fominha - Version 1.0",
     loading: "Loading data...",
+    menuLogin: "Login",
+    menuRecipeRegister: "Recipe register",
+    menuBurgerTips: "Burgers tips",
+    menuMyRecipes: "My recipes",
+    menuEditRecipe: "Edit recipe",
+    menuAbout: "About",
+    menuRegister: "User register",
+    menuHome: "Home",
 
   },
   "pt-BR": {
@@ -95,6 +103,14 @@ i18n.translations = {
     fields: "Por favor preencher os campos!",
     version: "Fominha - Versão 1.0",
     loading: "Carregando dados...",
+    menuLogin: "Logar",
+    menuRecipeRegister: "Cadastro de receita",
+    menuBurgerTips: "Dicas de Burgers",
+    menuMyRecipes: "Minhas receitas",
+    menuEditRecipe: "Editar receita",
+    menuAbout: "Sobre",
+    menuRegister: "Cadastro de usuário",
+    menuHome: "Tela inicial",
   },
 };
 // Set the locale once at the beginning of your app.
