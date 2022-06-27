@@ -75,7 +75,7 @@
 
 #### Alertas de erros - 08/06/2022 ✅
 
-#### Imagens das receitas -  (No momento usando a default) ✅
+#### Imagens das receitas -  27/06/2022 ✅
 
 ### Projeto final - (Entrega planejada para 27/06/2022) ✅
 
@@ -103,15 +103,16 @@
 
 ### Recurso inédito
 
-#### Foi criado um componente de busca para filtrar as receitas, e também estou aplicando o uso do ImagePicker para salvar e cadastrar a imagem das receitas.
+#### Foi criado um componente de busca para filtrar as receitas.
 
-##### Estou testando utilizar este recurso https://docs.expo.dev/versions/latest/sdk/imagepicker/
+##### Utilizado este recurso para salvar imagens das receitas https://docs.expo.dev/versions/latest/sdk/imagepicker/
 
-#### Tradução do APP para inglês e português em andamento no projeto...
+#### Tradução do APP para inglês e português está 90%.
 
 ## Observções
 
-#### Tradução em andamento em todas as telas e por fim a implementação do ImagePicker se possível.
+#### Falta apenas um pente fino para caçar bugs e erros.
+
 
 
 
