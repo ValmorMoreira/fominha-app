@@ -11,6 +11,10 @@ export default function About() {
     appModal.show(
       <View style={styles.modal}>
         <Text>{i18n.t("easterEgg")}</Text>
+        <Image
+                style={styles.logo}
+                source={require('../../assets/images/react.gif')}
+            />
         <Button title="OK" onPress={() => appModal.hide()} />
       </View>
     );

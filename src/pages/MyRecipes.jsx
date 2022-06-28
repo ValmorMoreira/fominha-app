@@ -6,17 +6,17 @@ import {
   Image,
   FlatList,
   StyleSheet,
+  ScrollView,
   TouchableOpacity,
   Button,
 } from "react-native";
 
 import { ModalContext } from "../components/AppModal";
-
 import SearchBox from "../components/SearchBox";
-
 import Recipes from "../services/sqlite/Recipes";
 
 export default function MyRecipes({ navigation }) {
+
   const appModal = useContext(ModalContext);
 
   const [recipesList, setRecipesList] = useState([]);
@@ -86,10 +86,10 @@ export default function MyRecipes({ navigation }) {
               {i18n.t("category")} - {item.category}
             </Text>
           </View>
-         <Image
+          <Image
             style={styles.image}
-            source={ item.image ? {uri: item.image} : require("../../assets/images/default.jpg")}
-          /> 
+            source={item.image ? { uri: item.image } : require("../../assets/images/default.jpg")}
+          />
           <Text style={styles.smallText}> {i18n.t("clickDetails")}</Text>
         </View>
       </TouchableOpacity>
@@ -98,64 +98,66 @@ export default function MyRecipes({ navigation }) {
 
   const handleModal = (item) => {
     appModal.show(
-      <View style={styles.modal}>
-        <Text style={styles.recipeTitle}>{item.name}</Text>
-        <View style={styles.imageLimit}>
-        <Image
-            style={styles.image}
-            source={ item.image ? {uri: item.image} : require("../../assets/images/default.jpg")}
-          />
-        </View>
-        <View>
-          <Text style={styles.recipeIngredientsAndPrepare}>{i18n.t("ingredients")}</Text>
-          <Text>{item.ingredients}</Text>
-          <Text style={styles.recipeIngredientsAndPrepare}>
-          {i18n.t("prepareMode")}
-          </Text>
-          <Text>{item.preparemode}</Text>
-        </View>
-        <View style={styles.btnContainer}>
-          <View style={styles.buttons}>
-            <Button title={i18n.t("edit")} onPress={() => handleRecipeEdit(item)} />
-          </View>
-          <View style={styles.buttons}>
-            <Button
-              color={"red"}
-              title={i18n.t("delete")}
-              onPress={() => onDelete(item.id)}
+      <ScrollView>
+   
+          <Text style={styles.recipeTitle}>{item.name}</Text>
+          <View style={styles.imageLimit}>
+            <Image
+              style={styles.image}
+              source={item.image ? { uri: item.image } : require("../../assets/images/default.jpg")}
             />
           </View>
-          <View style={styles.buttons}>
-            <Button
-              color={"green"}
-              title={i18n.t("back")}
-              onPress={() => appModal.hide()}
-            />
+          <View>
+            <Text style={styles.recipeIngredientsAndPrepare}>{i18n.t("ingredients")}</Text>
+            <Text>{item.ingredients}</Text>
+            <Text style={styles.recipeIngredientsAndPrepare}>{i18n.t("prepareMode")}</Text>
+            <Text>{item.preparemode}</Text>
           </View>
-        </View>
-      </View>
+          <View style={styles.btnContainer}>
+            <View style={styles.buttons}>
+              <Button title={i18n.t("edit")} onPress={() => handleRecipeEdit(item)} />
+            </View>
+            <View style={styles.buttons}>
+              <Button
+                color={"red"}
+                title={i18n.t("delete")}
+                onPress={() => onDelete(item.id)}
+              />
+            </View>
+            <View style={styles.buttons}>
+              <Button
+                color={"green"}
+                title={i18n.t("back")}
+                onPress={() => appModal.hide()}
+              />
+            </View>
+          </View>
+  
+      </ScrollView>
+
+
     );
   };
 
-  if(recipesList == 0){
-      return (
-        <View style={styles.bg}>      
-          <Text style={styles.nothing}> {i18n.t("noRecipesFound")} </Text>
-        </View>
-      )
-  }
+  if (recipesList == 0) {
     return (
       <View style={styles.bg}>
-        <Text style={styles.title}></Text>
-        <SearchBox onSearch={onSearch} />
-        <FlatList
-          data={recipesList}
-          renderItem={Recipe}
-          keyExtractor={(_item, index) => index}
-        />
+        <Text style={styles.nothing}> {i18n.t("noRecipesFound")} </Text>
       </View>
-    );
+    )
   }
+  return (
+    <View style={styles.bg}>
+      <Text style={styles.title}></Text>
+      <SearchBox onSearch={onSearch} />
+      <FlatList
+        data={recipesList}
+        renderItem={Recipe}
+        keyExtractor={(_item, index) => index}
+      />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   title: {
@@ -201,7 +203,7 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   imageLimit: {
-    height: "60%",
+   
   },
   bg: {
     backgroundColor: "purple",
@@ -218,11 +220,11 @@ const styles = StyleSheet.create({
   buttons: {
     width: "30%",
   },
-  nothing:{
+  nothing: {
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
     color: "white",
-    marginTop:"70%",
+    marginTop: "70%",
   }
 });

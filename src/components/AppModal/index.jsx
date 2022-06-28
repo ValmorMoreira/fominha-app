@@ -1,15 +1,16 @@
-import { View, Modal, StyleSheet, Image} from "react-native";
+import { View, Modal, StyleSheet, ScrollView } from "react-native";
 import React, { useState, createContext } from "react";
+
 
 export const ModalContext = createContext();
 
-export default function AppModal({children}) {
+export default function AppModal({ children }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
 
   const appModal = {
-    show: (content) => {
+      show: (content) => {
       setModalContent(content);
       setModalVisible(true);
     },
@@ -17,33 +18,40 @@ export default function AppModal({children}) {
   };
 
   return (
+
     <ModalContext.Provider value={appModal}>
-      <Modal
+      <Modal 
+        propagateSwipe={true}    
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           // this callback runs when device "back" button is pressed
           setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.container}>
-          <View style={styles.content}>{modalContent}</View>
-        </View>
+        }}>
+        <ScrollView >
+          <View style={styles.modalPosition}>
+          <View style={styles.container}>
+            <View style={styles.content} >
+              {modalContent}
+            </View>
+          </View>
+          </View>
+          
+        </ScrollView>
       </Modal>
-
       {children}
     </ModalContext.Provider>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    backgroundColor:"darkgrey",
+    margin: 15,
+    backgroundColor: "grey",
     borderRadius: 10,
-    padding:8,
-    alignItems:"flex-start",
+    padding: 12,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -55,22 +63,13 @@ const styles = StyleSheet.create({
   },
   content: {
     width: "100%",
-    height: "95%",
+    height: 500,
     backgroundColor: "white",
-    borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "space-around",
-    padding:5,
+    borderRadius: 10,
+    padding: 10,
   },
-  recipeName:{
-    fontSize:25,
-    fontWeight: "bold",
-    color:"purple",
-  },
-  image:{
-    width: 150,
-    height: 150,
-    resizeMode: "contain",
+  modalPosition:{
+    flex:1,
+    marginTop:"30%",
   }
-
 });

@@ -49,8 +49,9 @@ export default function RecipesList({ navigation }) {
           }
         })
         .catch((error) => {
-          console.error(error);
-          alert("Ocorreu um erro ao buscar o usuário " + "Debug mode: " + error);
+          //console.error(error);
+          alert(`${i18n.t("invalidUser")}`);
+          console.log("Ocorreu um erro ao buscar o e-mail " + "Debug mode: " + error);
         });
     }
 
